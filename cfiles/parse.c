@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:56:52 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/13 18:11:48 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/14 15:03:34 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ t_list	*parse(char *file)
 		free(str);
 		ft_lstadd_back(&list, ft_lstnew(tabtoobj(tab)));
 	}
-	//if (error(list) == -1)
-	//	return (NULL);
 	close(fd);
 	return (list);
 }

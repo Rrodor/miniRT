@@ -1,5 +1,5 @@
 NAME= miniRT
-SRC= main.c parse.c close.c utils.c tabtoobj.c
+SRC= main.c parse.c close.c utils.c tabtoobj.c tabtoform.c free.c free2.c
 SRCPATH= ./cfiles/
 OBJ= $(SRC:.c=.o)
 OBJS= $(addprefix $(OBJPATH), $(OBJ))

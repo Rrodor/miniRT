@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/13 18:26:49 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/14 15:02:24 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,18 @@ void	*tabtoobj(char **tab);
 
 // close.c
 int		win_close(t_vars *vars);
+
+// free.c
+void	a_free(t_a *a);
+void	c_free(t_c *c);
+void	l_free(t_l *l);
+void	freelst(void *content);
+void	freetab(void *content);
+
+// free2.c
+void	sp_free(t_sp *sp);
+void	pl_free(t_pl *pl);
+void	cy_free(t_cy *cy);
 
 // utils.c
 int		ft_tablen(char **tab);

@@ -1,50 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   free2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 16:44:47 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/14 15:03:44 by rrodor           ###   ########.fr       */
+/*   Created: 2023/08/14 14:58:57 by rrodor            #+#    #+#             */
+/*   Updated: 2023/08/14 15:01:43 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	tablen(char **tab)
+void	sp_free(t_sp *sp)
 {
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
+	free(sp->id);
+	free(sp);
 }
 
-float	ft_atof(char *str)
+void	pl_free(t_pl *pl)
 {
-	float	nb;
-	int		i;
-	int		j;
+	free(pl->id);
+	free(pl);
+}
 
-	i = 0;
-	j = 0;
-	nb = 0;
-	while (str[i] && str[i] != '.')
-	{
-		nb = nb * 10 + (str[i] - '0');
-		i++;
-	}
-	if (str[i] == '.')
-	{
-		i++;
-		while (str[i] && ft_isdigit(str[i]))
-		{
-			nb = nb + ((str[i] - '0') / pow(10, j + 1));
-			i++;
-			j++;
-		}
-	}
-	return (nb);
+void	cy_free(t_cy *cy)
+{
+	free(cy->id);
+	free(cy);
 }

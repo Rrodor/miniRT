@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 14:02:21 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/13 18:41:57 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/14 15:08:37 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,16 @@ int	key_hook(int keycode, t_vars *vars)
 
 void	ft_lstprint(void *content)
 {
-	t_a *a;
+	t_a	*a;
 
 	a = (t_a *)content;
 	ft_printf("%s\n", a->id);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_vars	vars;
 	t_list	*list;
-	(void)argv;
 
 	if (argc != 2)
 		return (0);
