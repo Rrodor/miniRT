@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/14 15:02:24 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/15 14:03:43 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ typedef struct s_cy
 }				t_cy;
 
 // parse.c
-t_list	*parse(char *file);
+t_list	*parse(int fd);
+int		opener(char *file, int *fd);
 
 // tabtoobj.c
 t_a		*tabtoamb(char **tab);
@@ -134,7 +135,22 @@ void	pl_free(t_pl *pl);
 void	cy_free(t_cy *cy);
 
 // utils.c
-int		ft_tablen(char **tab);
+int		tablen(char **tab);
 float	ft_atof(char *str);
+int		isfloat(char *str);
+
+// error.c
+int		rt_error(char **str);
+int		error_a(char **str);
+int		error_c(char **str);
+int		error_l(char **str);
+int		error_color(char *str);
+
+// errorform.c
+int		errorform(char **str);
+int		error_sp(char **str);
+int		error_pl(char **str);
+int		error_cy(char **str);
+int		error_vector(char *str);
 
 #endif

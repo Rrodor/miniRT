@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:44:47 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/14 15:03:44 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/15 14:03:25 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,17 @@ float	ft_atof(char *str)
 	float	nb;
 	int		i;
 	int		j;
+	int		neg;
 
 	i = 0;
 	j = 0;
 	nb = 0;
+	neg = 1;
+	if (str[i] == '-' || str[i] == '+')
+		if (str[i++] == '-')
+			neg = -1;
 	while (str[i] && str[i] != '.')
-	{
-		nb = nb * 10 + (str[i] - '0');
-		i++;
-	}
+		nb = nb * 10 + (str[i++] - '0');
 	if (str[i] == '.')
 	{
 		i++;
@@ -46,5 +48,31 @@ float	ft_atof(char *str)
 			j++;
 		}
 	}
-	return (nb);
+	return (nb * neg);
+}
+
+int	isfloat(char *str)
+{
+	int	i;
+	int	p;
+
+	i = 0;
+	p = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i])
+	{
+		if (str[i] == '.' && p == 0)
+		{
+			p++;
+			i++;
+		}
+		if (str[i] == '.' && p == 1)
+			return (1);
+		else if (ft_isdigit(str[i]))
+			i++;
+		else
+			return (1);
+	}
+	return (0);
 }

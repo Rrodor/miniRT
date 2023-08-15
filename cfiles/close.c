@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:24:48 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/14 15:09:08 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/14 19:17:33 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	win_close(t_vars *vars)
 	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
-	ft_lstclear(&(vars->objs), &freelst);
+	if (vars->objs)
+		ft_lstclear(&(vars->objs), &freelst);
 	exit(0);
 }
