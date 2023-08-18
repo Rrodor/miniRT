@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 15:49:26 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/15 14:02:40 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/18 19:01:12 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	rt_error(char **str)
 {
-	static t_point	i = {0, 0, 0};
+	static t_vec	i = {0, 0, 0};
 
 	if (!str[0])
 		return (0);

@@ -18,7 +18,7 @@ int	ft_printf(const char *str, ...)
 	int		l;
 	va_list	argptr;
 
-	va_start(argptr, 0);
+	va_start(argptr, str);
 	i = 0;
 	l = 0;
 	while (str[i])
@@ -35,6 +35,7 @@ int	ft_printf(const char *str, ...)
 			i += 2;
 		}
 	}
+	va_end(argptr);
 	return (l);
 }
 

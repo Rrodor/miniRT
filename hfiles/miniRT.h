@@ -3,27 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/15 14:03:43 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/18 19:19:01 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "../minilibx-linux/mlx.h"
-# include "../libft/libft.h"
-# include "../libft/get_next_line.h"
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
 
+# include "../minilibx/mlx.h"
+# include "../libft/libft.h"
+# include "../libft/get_next_line.h"
+
 # define KEY_ESC 65307
+
 # define WINX 800
 # define WINY 600
+
+# define RAY_MIN 0.0001
+# define RAY_MAX 1.0e30
+
+# include "ray.h"
+# include "vector.h"
+# include "inter.h"
 
 typedef struct s_data
 {
@@ -42,13 +51,6 @@ typedef struct s_vars
 	t_list		*objs;
 }				t_vars;
 
-typedef struct s_point
-{
-	float	x;
-	float	y;
-	float	z;
-}				t_point;
-
 typedef struct s_rgb
 {
 	int	r;
@@ -56,6 +58,7 @@ typedef struct s_rgb
 	int	b;
 }				t_rgb;
 
+// ambiant
 typedef struct s_a
 {
 	char	*id;
@@ -63,44 +66,49 @@ typedef struct s_a
 	t_rgb	color;
 }				t_a;
 
+// camera
 typedef struct s_c
 {
 	char	*id;
-	t_point	pos;
-	t_point	dir;
+	t_vec	pos;
+	t_vec	dir;
 	float	fov;
 	t_rgb	color;
 }				t_c;
 
+// light
 typedef struct s_l
 {
 	char	*id;
-	t_point	pos;
+	t_vec	pos;
 	float	ratio;
 	t_rgb	color;
 }				t_l;
 
+// sphere
 typedef struct s_sp
 {
 	char	*id;
-	t_point	pos;
+	t_vec	pos;
 	float	radius;
 	t_rgb	color;
 }				t_sp;
 
+// plane
 typedef struct s_pl
 {
 	char	*id;
-	t_point	pos;
-	t_point	dir;
+	t_vec	pos;
+	t_vec	dir;
 	t_rgb	color;
 }				t_pl;
 
+// cylinder
 typedef struct s_cy
 {
 	char	*id;
-	t_point	pos;
-	t_point	dir;
+	t_vec	pos;
+	t_vec	dir;
 	float	diameter;
 	float	height;
 	t_rgb	color;
@@ -152,5 +160,9 @@ int		error_sp(char **str);
 int		error_pl(char **str);
 int		error_cy(char **str);
 int		error_vector(char *str);
+
+typedef struct s_vec t_vec;
+typedef struct s_ray t_ray;
+typedef struct s_inter t_inter;
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 14:02:21 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/14 19:25:53 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/18 18:51:43 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 	vars.img.img = mlx_new_image(vars.mlx, WINX, WINY);
 	vars.img.addr = mlx_get_data_addr(vars.img.img, &(vars.img).bits_per_pixel,
 			&(vars.img).line_length, &(vars.img).endian);
-	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
+	//mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
 	mlx_hook(vars.win, 17, 0L, win_close, &vars);
 	mlx_key_hook(vars.win, key_hook, &vars);
 	mlx_loop(vars.mlx);

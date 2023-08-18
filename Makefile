@@ -1,30 +1,54 @@
-NAME= miniRT
-SRC= main.c parse.c close.c utils.c tabtoobj.c tabtoform.c free.c free2.c error.c errorform.c
+NAME= 	miniRT
+
+SRC= 	main.c \
+		parse.c \
+		close.c \
+		utils.c \
+		tabtoobj.c \
+		tabtoform.c \
+		free.c \
+		free2.c \
+		error.c \
+		errorform.c \
+		vector_utils_1.c \
+		vector_utils_2.c \
+		vector_utils_3.c \
+		ray.c \
+		inter.c
+
 SRCPATH= ./cfiles/
 OBJ= $(SRC:.c=.o)
 OBJS= $(addprefix $(OBJPATH), $(OBJ))
 SRCS= $(addprefix $(SRCPATH), $(SRC))
 OBJPATH= ./ofiles/
 
+LIBFT 	= ./libft/libft.a
+LIBINC 	= -I./libft
+LIBLINK = -L./libft -lft
+
+MLX		= minilibx/libmlx.a
+MLXINC	= -I./minilibx
+MLXLINK = -L./minilibx -lmlx -framework OpenGL -framework AppKit
+
 CC= gcc -Wall -Wextra -Werror
 
 all: makelib $(NAME)
 
 makelib:
-	make -C ./libft
-	make -C ./minilibx-linux
+	make -C libft
+	make -C minilibx
 
 $(OBJPATH)%.o: $(SRCPATH)%.c
 	mkdir -p $(OBJPATH)
-	$(CC) -I./hfiles -I./libft -I./minilibx-linux -o $@ -c $<
+	$(CC) -I./hfiles -I./libft -I$(MLX) -o $@ -c $<
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(NAME) -Llibft -lft -Lminilibx-linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz -I./libft2 -I./minilibx_linux -I./hfiles
+	$(CC) -o $(NAME) $(OBJS) $(MLXLINK) $(LIBLINK)
 
 clean:
 	rm -f $(OBJS)
 	make clean -C ./libft
-	make clean -C ./minilibx-linux
+	make clean -C ./minilibx
 
 fclean: clean
 	rm -f $(NAME)
