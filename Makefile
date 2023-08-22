@@ -14,7 +14,9 @@ SRC= 	main.c \
 		vector_utils_2.c \
 		vector_utils_3.c \
 		ray.c \
-		inter.c
+		inter.c \
+		render.c \
+		position.c
 
 SRCPATH= ./cfiles/
 OBJ= $(SRC:.c=.o)
