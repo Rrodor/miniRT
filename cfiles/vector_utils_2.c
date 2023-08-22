@@ -6,11 +6,12 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:59:24 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/18 18:33:03 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/22 09:10:10 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
+#include <math.h>
 
 t_vec    *vec_cross(t_vec *v1, t_vec *v2)
 {
