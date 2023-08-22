@@ -40,7 +40,7 @@ makelib:
 
 $(OBJPATH)%.o: $(SRCPATH)%.c
 	mkdir -p $(OBJPATH)
-	$(CC) -I./hfiles -I./libft -I$(MLX) -o $@ -c $<
+	$(CC) -I./hfiles -I./libft -I./minilibx -o $@ -c $<
 
 $(NAME): $(OBJS)
 	$(CC) -o $(NAME) $(OBJS) $(MLXLINK) $(LIBLINK)
