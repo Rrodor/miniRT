@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/22 18:34:30 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/22 18:39:07 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,6 @@ int				error_cy(char **str);
 int				error_vector(char *str);
 
 // render.c
-int				render(t_vars vars);
+int				render(t_vars *vars);
 
 #endif
