@@ -28,7 +28,7 @@ LIBLINK = -L./libft -lft
 
 MLX		= minilibx/libmlx.a
 MLXINC	= -I./minilibx
-MLXLINK = -L./minilibx -lmlx -framework OpenGL -framework AppKit
+MLXLINK = -L./minilibx -lmlx -lXext -lX11
 
 CC= gcc -Wall -Wextra -Werror
 
