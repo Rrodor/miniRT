@@ -6,11 +6,12 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:58:50 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/18 18:33:00 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/22 09:05:22 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
+#include <stdlib.h>
 
 t_vec    *vec_new(double x, double y, double z)
 {
