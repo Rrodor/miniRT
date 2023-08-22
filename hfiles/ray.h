@@ -6,14 +6,12 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 17:25:02 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/18 19:01:51 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/22 09:00:31 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAY_H
 # define RAY_H
-
-#include "miniRT.h"
 
 typedef struct s_vec t_vec;
 

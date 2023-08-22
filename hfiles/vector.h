@@ -6,14 +6,12 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:54:54 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/18 19:02:24 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/22 09:00:35 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_H
 # define VECTOR_H
-
-# include "miniRT.h"
 
 // Vector3 struct
 typedef struct 	s_vec
