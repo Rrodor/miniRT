@@ -6,11 +6,12 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 17:37:05 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/18 18:32:44 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/22 09:11:25 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
+#include <stdlib.h>
 
 void    vec_copy(t_vec *dst, t_vec *src)
 {
