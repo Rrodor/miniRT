@@ -28,7 +28,7 @@ LIBLINK = -L./libft -lft
 
 MLX		= minilibx/libmlx.a
 MLXINC	= -I./minilibx
-MLXLINK = -L./minilibx -lmlx -lXext -lX11
+MLXLINK = -L./minilibx -lmlx -lXext -lX11 -lm
 
 CC= gcc -Wall -Wextra -Werror
 
