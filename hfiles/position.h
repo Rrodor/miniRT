@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:14:20 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 16:57:39 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 16:59:45 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 # define POINT_H
 
-// position
+# include "vector.h"
+
 typedef struct s_pos
 {
 	double	x;
