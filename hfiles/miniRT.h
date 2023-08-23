@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/23 11:07:02 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 11:56:43 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # include "vector.h"
 # include "inter.h"
 # include "position.h"
+# include "camera.h"
+# include "color.h"
 
 typedef struct	s_data
 {
