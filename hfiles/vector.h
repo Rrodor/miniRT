@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:54:54 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/22 20:33:50 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 12:13:16 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ double  vec_len(t_vec *v);
 void    vec_copy(t_vec *dst, t_vec *src);
 void    vec_free(t_vec *vec);
 t_vec   *vec_unit(t_vec *v);
+double  vec_dot(t_vec *v1, t_vec *v2);
 
 #endif
