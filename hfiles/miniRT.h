@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/23 11:58:58 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 17:14:41 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,6 @@ int				error_vector(char *str);
 
 // render.c
 int				render(t_vars *vars);
-
-// raytracer.c
-t_rgb	 		get_color(t_ray *ray);
 
 // viewport.h
 t_pos			*get_pixel_center(int x, int y);
