@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/22 18:39:07 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 11:07:02 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,6 @@
 # include "inter.h"
 # include "position.h"
 
-typedef struct s_vec t_vec;
-typedef struct s_ray t_ray;
-typedef struct s_inter t_inter;
-typedef struct s_pos t_pos;
-
 typedef struct	s_data
 {
 	void		*img;
@@ -57,13 +52,6 @@ typedef struct	s_vars
 	t_list		*objs;
 }				t_vars;
 
-typedef struct	s_rgb
-{
-	int			r;
-	int			g;
-	int			b;
-}				t_rgb;
-
 // ambiant
 typedef struct	s_a
 {
@@ -71,16 +59,6 @@ typedef struct	s_a
 	float		ratio;
 	t_rgb		color;
 }				t_a;
-
-// camera
-typedef struct	s_c
-{
-	char		*id;
-	t_pos		pos;
-	t_vec		dir;
-	float		fov;
-	t_rgb		color;
-}				t_c;
 
 // light
 typedef struct	s_l
@@ -169,5 +147,11 @@ int				error_vector(char *str);
 
 // render.c
 int				render(t_vars *vars);
+
+// raytracer.c
+t_rgb	 		get_color(t_ray *ray);
+
+// viewport.h
+t_pos			*get_pixel_center(int x, int y);
 
 #endif

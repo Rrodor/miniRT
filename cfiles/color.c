@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/18 17:25:02 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 09:53:41 by aramon           ###   ########.fr       */
+/*   Created: 2023/08/22 21:11:23 by aramon            #+#    #+#             */
+/*   Updated: 2023/08/23 11:51:44 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#include "color.h"
+#include "position.h"
+#include "ray.h"
 
-typedef struct s_vec t_vec;
-
-typedef struct	s_ray
+t_rgb    *get_color(t_ray *ray)
 {
-    t_vec	    *ori;
-    t_vec       *dir;
-    double      tMax;
-}				t_ray;
+    t_rgb   *color;
+    t_pos   *point;
 
-// ray.c
-t_ray   *ray_new(t_vec *origin, t_vec *direction);
-void    ray_copy(t_ray *dst, t_ray *src);
-void    ray_free(t_ray *ray);
-t_vec   *ray_calculate(t_ray *ray, double t);
-int     hit_sphere(t_pos *center, double radius, t_ray *ray);
-
-#endif
+    point = new_point(0, 0, -1);
+    color = init_color(0, 0, 0);
+    if (hit_sphere(point, 0.5, ray))
+        return (init_color(255, 0, 0)); // red
+    else
+        return (init_color(0, 0, 0)); // black
+}

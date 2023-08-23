@@ -16,7 +16,10 @@ SRC= 	main.c \
 		ray.c \
 		inter.c \
 		render.c \
-		position.c
+		position.c \
+		camera.c \
+		color.c \
+		viewport.c
 
 SRCPATH= ./cfiles/
 OBJ= $(SRC:.c=.o)

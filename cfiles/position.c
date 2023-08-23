@@ -6,14 +6,14 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:16:16 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/22 18:16:55 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 10:50:30 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "position.h"
 #include <stdlib.h>
 
-t_pos		*new_point(double x, double y, double z)
+t_pos		*point_new(double x, double y, double z)
 {
     t_pos   *pos;
 

@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/18 17:25:02 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 09:53:41 by aramon           ###   ########.fr       */
+/*   Created: 2023/08/22 20:52:44 by aramon            #+#    #+#             */
+/*   Updated: 2023/08/22 21:12:49 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#ifndef CAMERA_H
 
-typedef struct s_vec t_vec;
+# define CAMERA_H
 
-typedef struct	s_ray
+#include "vector.h"
+#include "position.h"
+
+typedef struct	s_cam
 {
-    t_vec	    *ori;
-    t_vec       *dir;
-    double      tMax;
-}				t_ray;
+	char		*id; // Why ?
+	t_pos		pos;
+	t_vec		dir;
+	float		fov;
+}				t_cam;
 
-// ray.c
-t_ray   *ray_new(t_vec *origin, t_vec *direction);
-void    ray_copy(t_ray *dst, t_ray *src);
-void    ray_free(t_ray *ray);
-t_vec   *ray_calculate(t_ray *ray, double t);
-int     hit_sphere(t_pos *center, double radius, t_ray *ray);
+t_cam   *init_cam();
 
 #endif

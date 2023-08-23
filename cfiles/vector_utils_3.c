@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 17:37:05 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/22 09:11:25 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/22 20:33:42 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,9 @@ void    vec_free(t_vec *vec)
     if (!vec)
         return ;
     free(vec);
+}
+
+t_vec   *vec_unit(t_vec *v)
+{
+    return (vec_div_num(v, vec_len(v)));
 }

@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 17:26:31 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/18 18:48:44 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/22 21:16:33 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,23 @@ t_vec   *ray_calculate(t_ray *ray, double t)
         ray->ori->y + t * ray->dir->y,
         ray->ori->z + t * ray->dir->z);
     return (vec);
+}
+
+// This part should move to a calculus / intersection file
+// Only here for testing purposes
+// Checks if the ray intersects with the sphere
+int hit_sphere(t_pos *center, double radius, t_ray *ray)
+{
+    t_vec   *oc;
+    double  a;
+    double  b;
+    double  c;
+
+    oc = vec_sub(ray->ori, center);
+    a = vec_dot(ray->dir, ray->dir);
+    b = 2.0 * vec_dot(oc, ray->dir);
+    c = vec_dot(oc, oc) - radius * radius;
+    if (b * b - 4 * a * c >= 0)
+        return (1);
+    return (0);
 }
