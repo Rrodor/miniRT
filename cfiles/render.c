@@ -6,13 +6,14 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:26:16 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 13:31:08 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 17:11:26 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "position.h"
 #include "ray.h"
+#include "color.h"
 
 void	img_pix_put(t_data *img, int x, int y, int color)
 {
@@ -41,7 +42,7 @@ int	render(t_vars *vars)
             pixel_center = get_pixel_center(i, j);
             ray_dir = vec_new(pixel_center->x, pixel_center->y, pixel_center->z); // <<-- (1) See below
             ray = ray_new(vec_new(0, 0, 0), ray_dir);
-            img_pix_put(&vars->img, i, j, encode_rgb(ray_color(ray)));
+            img_pix_put(&vars->img, i, j, encode_rgb(get_color(ray)));
             j++;
         }
         i++;
