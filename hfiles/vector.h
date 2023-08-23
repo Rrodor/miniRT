@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:54:54 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 16:57:09 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 17:04:16 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct 	s_vec
 	double		z;
 }				t_vec;
 
-# include "position.h"
+typedef struct s_pos t_pos;
 
 // vector_utils_1.c
 t_vec	*vec_new(double x, double y, double z);

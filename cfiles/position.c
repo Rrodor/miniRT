@@ -6,13 +6,14 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:16:16 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 16:58:18 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 17:04:31 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "position.h"
-#include "vector.h"
 #include <stdlib.h>
+
+typedef struct s_vec t_vec;
 
 t_pos		*point_new(double x, double y, double z)
 {

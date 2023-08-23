@@ -6,11 +6,12 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:35:13 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 16:54:11 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 17:08:39 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
+#include "position.h"
 
 t_pos   *vec_add_pos(t_vec *v1, t_vec *v2)
 {
