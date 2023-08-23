@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:19:22 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 16:55:18 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 16:57:50 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_pos   *get_pixel_center(int x, int y)
     // Get the upper left viewport pixel
     t_pos   *camera_center = point_new(0, 0, 0);
     t_pos   *focal_length = point_new(0, 0, 1);
-    t_vec   *viewport_upper_left_corner = vec_sub(vec_sub(vec_sub_pos(camera_center, focal_length), vec_div_num(viewport_u, 2.0)), vec_div(viewport_v, 2.0));
+    t_vec   *viewport_upper_left_corner = vec_sub(vec_sub(vec_sub_pos(camera_center, focal_length), vec_div_num(viewport_u, 2.0)), vec_div_num(viewport_v, 2.0));
     t_pos   *pixel_00_pos = vec_add_pos(viewport_upper_left_corner, vec_mult_num(pos_add_vec(pixel_delta_u, pixel_delta_v), 0.5));
 
     return (vec_add_pos_vec(pixel_00_pos, vec_add(vec_mult_pos_num(pixel_delta_u, x), vec_mult_pos_num(pixel_delta_v, y))));
