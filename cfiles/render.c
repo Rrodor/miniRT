@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:26:16 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 12:29:40 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 13:27:55 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	render(t_vars *vars)
         {
             pixel_center = get_pixel_center(i, j);
             ray_dir = vec_new(pixel_center->x, pixel_center->y, pixel_center->z); // <<-- (1) See below
-            ray = new_ray(new_point(0, 0, 0), ray_dir);
-            img_pix_put(&vars->img, i, j, ray_color(ray));
+            ray = ray_new(point_new(0, 0, 0), ray_dir);
+            img_pix_put(&vars->img, i, j, encode_color(ray_color(ray)));
             j++;
         }
         i++;

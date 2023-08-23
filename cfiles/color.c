@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:11:23 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 11:51:44 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 13:27:33 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,9 @@ t_rgb    *get_color(t_ray *ray)
         return (init_color(255, 0, 0)); // red
     else
         return (init_color(0, 0, 0)); // black
+}
+
+int encode_rgb(t_rgb *rgb)
+{
+    return (rgb->r << 16 | rgb->g << 8 | rgb->b);
 }
