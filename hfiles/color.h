@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:11:50 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 13:33:25 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 17:13:11 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct	s_rgb
 }				t_rgb;
 
 t_rgb           *init_color(int r, int g, int b);
-t_rgb           *ray_color(t_ray *ray);
+t_rgb           *get_color(t_ray *ray);
 int             encode_rgb(t_rgb *rgb);
 
 #endif
