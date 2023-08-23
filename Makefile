@@ -13,6 +13,7 @@ SRC= 	main.c \
 		vector_utils_1.c \
 		vector_utils_2.c \
 		vector_utils_3.c \
+		vector_utils_4.c \
 		ray.c \
 		inter.c \
 		render.c \

@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   position.c                                         :+:      :+:    :+:   */
+/*   vector_utils_4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/22 18:16:16 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 16:31:40 by aramon           ###   ########.fr       */
+/*   Created: 2023/08/23 16:35:13 by aramon            #+#    #+#             */
+/*   Updated: 2023/08/23 16:35:58 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "vector.h"
 #include "position.h"
-#include <stdlib.h>
 
-t_pos		*point_new(double x, double y, double z)
+t_pos   *vec_add_pos(t_vec *v1, t_vec *v2)
 {
     t_pos   *pos;
 
-    pos = (t_pos *)malloc(sizeof(t_pos));
-    if (!pos)
-        return (NULL);
-    pos->x = x;
-    pos->y = y;
-    pos->z = z;
+    pos = point_new(v1->x + v2->x, v1->y + v2->y, v1->z + v2->z);
     return (pos);
 }
