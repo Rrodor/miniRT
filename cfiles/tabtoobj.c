@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tabtoobj.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 17:51:12 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/14 15:07:43 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/23 12:03:24 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ t_a	*tabtoamb(char **tab)
 	return (amb);
 }
 
-t_c	*tabtocam(char **tab)
+t_cam	*tabtocam(char **tab)
 {
-	t_c		*cam;
+	t_cam	*cam;
 	char	**tmp;
 
-	cam = malloc(sizeof(t_c));
+	cam = malloc(sizeof(t_cam));
 	cam->id = ft_strdup("C");
 	tmp = ft_split(tab[1], ',');
 	cam->pos.x = ft_atof(tmp[0]);
