@@ -6,11 +6,12 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:16:16 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 16:44:39 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 16:54:48 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "position.h"
+#include "vector.h"
 #include <stdlib.h>
 
 t_pos		*point_new(double x, double y, double z)
@@ -24,4 +25,12 @@ t_pos		*point_new(double x, double y, double z)
     pos->y = y;
     pos->z = z;
     return (pos);
+}
+
+t_pos   *vec_add_pos_vec(t_pos *pos, t_vec *vec)
+{
+    t_pos   *new_pos;
+
+    new_pos = vec_new(pos->x + vec->x, pos->y + vec->y, pos->z + vec->z);
+    return (new_pos);
 }

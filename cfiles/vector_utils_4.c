@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:35:13 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 16:50:35 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 16:54:11 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,4 @@ t_vec   *vec_mult_pos_num(t_pos *pos, int n)
 
     vec = vec_new(pos->x * n, pos->y * n, pos->z * n);
     return (vec);
-}
-
-t_vec   *vec_add_pos_vec(t_pos *pos, t_vec *vec)
-{
-    t_vec   *new_vec;
-
-    new_vec = vec_new(pos->x + vec->x, pos->y + vec->y, pos->z + vec->z);
-    return (new_vec);
 }
