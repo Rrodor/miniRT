@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 17:26:31 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/22 21:16:33 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 12:08:41 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int hit_sphere(t_pos *center, double radius, t_ray *ray)
     double  b;
     double  c;
 
-    oc = vec_sub(ray->ori, center);
+    oc = vec_new(ray->ori->x - center->x, ray->ori->y - center->y, ray->ori->z - center->z);
     a = vec_dot(ray->dir, ray->dir);
     b = 2.0 * vec_dot(oc, ray->dir);
     c = vec_dot(oc, oc) - radius * radius;
