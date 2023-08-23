@@ -6,14 +6,15 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 17:25:02 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 09:53:41 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 12:01:34 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAY_H
 # define RAY_H
 
-typedef struct s_vec t_vec;
+# include "vector.h"
+# include "position.h"
 
 typedef struct	s_ray
 {
