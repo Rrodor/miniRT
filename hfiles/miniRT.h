@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/23 11:56:43 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/23 11:58:58 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int				opener(char *file, int *fd);
 
 // tabtoobj.c
 t_a				*tabtoamb(char **tab);
-t_c				*tabtocam(char **tab);
+t_cam			*tabtocam(char **tab);
 t_l				*tabtolight(char **tab);
 t_sp			*tabtosphere(char **tab);
 t_pl			*tabtoplane(char **tab);
@@ -118,7 +118,7 @@ int				win_close(t_vars *vars);
 
 // free.c
 void			a_free(t_a *a);
-void			c_free(t_c *c);
+void			c_free(t_cam *c);
 void			l_free(t_l *l);
 void			freelst(void *content);
 void			freetab(void *content);

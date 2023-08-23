@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 15:00:43 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/14 15:03:13 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/23 11:58:41 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	a_free(t_a *a)
 	free(a);
 }
 
-void	c_free(t_c *c)
+void	c_free(t_cam *c)
 {
 	free(c->id);
 	free(c);
@@ -38,7 +38,7 @@ void	freelst(void *content)
 	if (ft_strncmp(a->id, "A", 1) == 0)
 		a_free(((t_a *)content));
 	else if (ft_strncmp(a->id, "C", 1) == 0)
-		c_free(((t_c *)content));
+		c_free(((t_cam *)content));
 	else if (ft_strncmp(a->id, "L", 1) == 0)
 		l_free(((t_l *)content));
 	else if (ft_strncmp(a->id, "sp", 2) == 0)
