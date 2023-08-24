@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/23 17:14:41 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/24 16:51:24 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
+# include <stdio.h>
 
 # include "../minilibx/mlx.h"
 # include "../libft/libft.h"
@@ -24,8 +25,8 @@
 
 # define KEY_ESC 65307
 
-# define WINX 800
-# define WINY 600
+# define WINX 500
+# define WINY 500
 
 # define RAY_MIN 0.0001
 # define RAY_MAX 1.0e30
