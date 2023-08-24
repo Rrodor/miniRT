@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 17:26:31 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 12:13:20 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/24 17:47:29 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,12 @@ int hit_sphere(t_pos *center, double radius, t_ray *ray)
     if (b * b - 4 * a * c >= 0)
         return (1);
     return (0);
+}
+
+int	hit_plane(t_pl *plane, t_ray *ray)
+{
+	ft_printf("test");
+	if (vec_dot(ray->dir, plane->dir) != 0)
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/24 16:51:24 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/24 17:46:14 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ typedef struct	s_sp
 typedef struct 	s_pl
 {
 	char		*id;
-	t_pos		pos;
-	t_vec		dir;
+	t_pos		*pos;
+	t_vec		*dir;
 	t_rgb		color;
 }				t_pl;
 
@@ -153,5 +153,8 @@ int				render(t_vars *vars);
 
 // viewport.h
 t_pos			*get_pixel_center(int x, int y);
+
+//ray.h
+int		hit_plane(t_pl *plane, t_ray *ray);
 
 #endif

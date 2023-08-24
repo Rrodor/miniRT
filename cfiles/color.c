@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:11:23 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 13:34:47 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/24 17:56:10 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 #include "position.h"
 #include "ray.h"
+#include "miniRT.h"
 #include <stdlib.h>
 
 t_rgb   *init_color(int r, int g, int b)
@@ -30,11 +31,17 @@ t_rgb   *init_color(int r, int g, int b)
 
 t_rgb    *get_color(t_ray *ray)
 {
-    t_pos   *point;
+	t_pos   *point;
+	t_pl	*plane;
 
+	plane = (t_pl *)malloc(sizeof(t_pl));
+	plane->pos = point_new(0, 0, 0);
+	plane->dir = vec_new(0, 0, 1);
     point = point_new(0, 0, -1);
     if (hit_sphere(point, 0.5, ray))
         return (init_color(255, 0, 0)); // red
+	else if (hit_plane(plane, ray))
+		return (init_color(0, 255, 0)); // green
     else
         return (init_color(0, 0, 0)); // black
 }
