@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 17:26:31 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/24 17:47:29 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/25 18:52:18 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,23 @@ int hit_sphere(t_pos *center, double radius, t_ray *ray)
 
 int	hit_plane(t_pl *plane, t_ray *ray)
 {
-	ft_printf("test");
-	if (vec_dot(ray->dir, plane->dir) != 0)
-		return (1);
-	return (0);
+	float	denom;
+	float	t;
+	t_vec	*ray_o;
+	t_vec	*pl_o;
+
+	ray_o = vec_new(ray->ori->x, ray->ori->y, ray->ori->z);
+	pl_o = vec_new(plane->pos->x, plane->pos->y, plane->pos->z);
+
+	denom = vec_dot(plane->dir, pl_o);
+	if (vec_dot(ray->dir, plane->dir) == 0)
+		return (0);
+	//t = vec_dot(vec_sub(plane->pos, ray->ori), plane->dir) / denom;
+	t = (denom - vec_dot(plane->dir, ray_o)) / vec_dot(plane->dir, ray->dir);
+	printf("t = %f\n", t);
+	if (t < 0)
+		return (0);
+	if (t > 100)
+		return (0);
+	return (t / 10);
 }
