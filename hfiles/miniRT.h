@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/24 17:46:14 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/26 18:22:36 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@
 # include "ray.h"
 # include "vector.h"
 # include "inter.h"
-# include "position.h"
 # include "camera.h"
 # include "color.h"
 
@@ -67,7 +66,7 @@ typedef struct	s_a
 typedef struct	s_l
 {
 	char		*id;
-	t_pos		pos;
+	t_vec		pos;
 	float		ratio;
 	t_rgb		color;
 }				t_l;
@@ -76,7 +75,7 @@ typedef struct	s_l
 typedef struct	s_sp
 {
 	char		*id;
-	t_pos		pos;
+	t_vec		*pos;
 	float		radius;
 	t_rgb		color;
 }				t_sp;
@@ -85,7 +84,7 @@ typedef struct	s_sp
 typedef struct 	s_pl
 {
 	char		*id;
-	t_pos		*pos;
+	t_vec		*pos;
 	t_vec		*dir;
 	t_rgb		color;
 }				t_pl;
@@ -94,8 +93,8 @@ typedef struct 	s_pl
 typedef struct	s_cy
 {
 	char		*id;
-	t_pos		pos;
-	t_vec		dir;
+	t_vec		*pos;
+	t_vec		*dir;
 	float		diameter;
 	float		height;
 	t_rgb		color;
@@ -152,7 +151,7 @@ int				error_vector(char *str);
 int				render(t_vars *vars);
 
 // viewport.h
-t_pos			*get_pixel_center(int x, int y);
+t_vec			*get_pixel_center(int x, int y);
 
 //ray.h
 int		hit_plane(t_pl *plane, t_ray *ray);

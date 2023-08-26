@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 17:26:31 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/25 18:52:18 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/26 18:20:37 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_vec   *ray_calculate(t_ray *ray, double t)
 // This part should move to a calculus / intersection file
 // Only here for testing purposes
 // Checks if the ray intersects with the sphere
-int hit_sphere(t_pos *center, double radius, t_ray *ray)
+int hit_sphere(t_vec *center, double radius, t_ray *ray)
 {
     t_vec   *oc;
     double  a;
@@ -89,12 +89,11 @@ int	hit_plane(t_pl *plane, t_ray *ray)
 	denom = vec_dot(plane->dir, pl_o);
 	if (vec_dot(ray->dir, plane->dir) == 0)
 		return (0);
-	//t = vec_dot(vec_sub(plane->pos, ray->ori), plane->dir) / denom;
 	t = (denom - vec_dot(plane->dir, ray_o)) / vec_dot(plane->dir, ray->dir);
 	printf("t = %f\n", t);
 	if (t < 0)
 		return (0);
 	if (t > 100)
 		return (0);
-	return (t / 10);
+	return (t / 6);
 }

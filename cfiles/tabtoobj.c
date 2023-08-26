@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tabtoobj.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 17:51:12 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/23 12:03:24 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/26 18:21:40 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,10 @@ t_cam	*tabtocam(char **tab)
 	cam = malloc(sizeof(t_cam));
 	cam->id = ft_strdup("C");
 	tmp = ft_split(tab[1], ',');
-	cam->pos.x = ft_atof(tmp[0]);
-	cam->pos.y = ft_atof(tmp[1]);
-	cam->pos.z = ft_atof(tmp[2]);
+	cam->pos = vec_new(ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2]));
 	freetab(tmp);
 	tmp = ft_split(tab[2], ',');
-	cam->dir.x = ft_atof(tmp[0]);
-	cam->dir.y = ft_atof(tmp[1]);
-	cam->dir.z = ft_atof(tmp[2]);
+	cam->dir = vec_new(ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2]));
 	freetab(tmp);
 	cam->fov = ft_atof(tab[3]);
 	freetab(tab);

@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:11:23 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/25 18:51:31 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/25 19:02:45 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_rgb    *get_color(t_ray *ray)
 
 	plane = (t_pl *)malloc(sizeof(t_pl));
 	plane->pos = point_new(5, 5, 5);
-	plane->dir = vec_new(1, 1, 1);
+	plane->dir = vec_new(2, 2, 1);
     point = point_new(0, 0, -1);
 	i = hit_plane(plane, ray);
     if (hit_sphere(point, 0.5, ray))

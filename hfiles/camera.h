@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:52:44 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 11:55:18 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/26 18:22:20 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 # define CAMERA_H
 
 #include "vector.h"
-#include "position.h"
 
 typedef struct	s_cam
 {
 	char		*id; // Why ?
-	t_pos		pos;
-	t_vec		dir;
+	t_vec		*pos;
+	t_vec		*dir;
 	float		fov;
 }				t_cam;
 
