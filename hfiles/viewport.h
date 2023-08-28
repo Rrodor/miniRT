@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inter.c                                            :+:      :+:    :+:   */
+/*   viewport.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/18 18:38:54 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/27 10:07:13 by aramon           ###   ########.fr       */
+/*   Created: 2023/08/27 11:30:20 by aramon            #+#    #+#             */
+/*   Updated: 2023/08/27 12:14:10 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#ifndef VIEWPORT_H
 
-void	inter_new(t_inter *inter, t_ray *ray)
-{
-	ray_copy(inter->ray, ray);
-	inter->t = ray->tMax;
-	// Shape assignment
-}
+# define VIEWPORT_H
 
-void	inter_copy(t_inter *dst, t_inter *src)
-{
-	ray_copy(dst->ray, src->ray);
-	dst->t = src->t;
-	// Shape assignment
-}
+typedef struct s_vec t_vec;
 
-t_vec	*inter_pos(t_inter *inter)
+typedef struct s_viewport
 {
-	return (ray_calculate(inter->ray, inter->t));
-}
+	double		width;
+	double		height;
+	double		focal_length;
+	t_vec		*u;
+	t_vec		*v;
+	t_vec		*d_u; // pixel_delta_u
+	t_vec		*d_v; // pixel_delta_v
+	t_vec		*upper_left_corner;
+	t_vec		*p_pixel_00;
+}				t_viewport;
+
+t_viewport		*init_viewport();
+t_vec			*get_pixel_center(t_viewport *viewport, int x, int y);
+
+#endif

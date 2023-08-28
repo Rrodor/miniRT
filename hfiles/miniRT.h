@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/26 18:22:36 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/27 19:46:20 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,20 @@
 
 # define KEY_ESC 65307
 
-# define WINX 500
-# define WINY 500
+# define WINX 400
+# define WINY 200
 
 # define RAY_MIN 0.0001
 # define RAY_MAX 1.0e30
+
+# define GREEN 0x00FF00
 
 # include "ray.h"
 # include "vector.h"
 # include "inter.h"
 # include "camera.h"
 # include "color.h"
+# include "viewport.h"
 
 typedef struct	s_data
 {
@@ -51,7 +54,9 @@ typedef struct	s_vars
 	void		*mlx;
 	void		*win;
 	t_data		img;
+	t_data		img_progress;
 	t_list		*objs;
+	t_viewport	*viewport;
 }				t_vars;
 
 // ambiant
@@ -149,11 +154,5 @@ int				error_vector(char *str);
 
 // render.c
 int				render(t_vars *vars);
-
-// viewport.h
-t_vec			*get_pixel_center(int x, int y);
-
-//ray.h
-int		hit_plane(t_pl *plane, t_ray *ray);
 
 #endif

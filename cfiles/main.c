@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 14:02:21 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/24 14:29:44 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/27 19:30:33 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,27 @@ int	main(int argc, char **argv)
 	//ft_lstiter(list, &ft_lstprint);
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WINX, WINY, "miniRT");
+
+	// Main image (render)
 	vars.img.img = mlx_new_image(vars.mlx, WINX, WINY);
 	vars.img.addr = mlx_get_data_addr(vars.img.img, &(vars.img).bits_per_pixel,
 			&(vars.img).line_length, &(vars.img).endian);
-	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
-	render(&vars); // <---
+	
+	// Secondary image (progress)
+	vars.img_progress.img = mlx_new_image(vars.mlx, WINX, WINY);
+	vars.img_progress.addr = mlx_get_data_addr(vars.img_progress.img, &(vars.img_progress).bits_per_pixel,
+			&(vars.img_progress).line_length, &(vars.img_progress).endian);
+
+	// Viewport
+	vars.viewport = init_viewport();
+
+	// Render
+	render(&vars);
+	
+	// mlx loop
 	mlx_hook(vars.win, 17, 0L, win_close, &vars);
 	mlx_key_hook(vars.win, key_hook, &vars);
 	mlx_loop(vars.mlx);
+	
 	return (0);
 }

@@ -6,37 +6,46 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 17:37:05 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/23 17:15:51 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/28 14:21:51 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
-#include "position.h"
 #include <stdlib.h>
+#include <math.h>
 
-void    vec_copy(t_vec *dst, t_vec *src)
+t_vec	*vec_cross(t_vec *v1, t_vec *v2)
 {
-    dst->x = src->x;
-    dst->y = src->y;
-    dst->z = src->z;
+	return (vec_new(v1->y * v2->z - v1->z * v2->y,
+		v1->z * v2->x - v1->x * v2->z,
+		v1->x * v2->y - v1->y * v2->x));
 }
 
-void    vec_free(t_vec *vec)
+void	vec_copy(t_vec *dst, t_vec *src)
 {
-    if (!vec)
-        return ;
-    free(vec);
+	dst->x = src->x;
+	dst->y = src->y;
+	dst->z = src->z;
 }
 
-double  vec_dot(t_vec *v1, t_vec *v2)
+void	vec_free(t_vec *vec)
 {
-    return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
+	if (!vec)
+	return ;
+	free(vec);
 }
 
-t_vec   *vec_sub_pos(t_pos *p1, t_pos *p2)
+double	vec_dot(t_vec *v1, t_vec *v2)
 {
-    t_vec   *vec;
+	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
+}
 
-    vec = vec_new(p1->x - p2->x, p1->y - p2->y, p1->z - p2->z);
-    return (vec);
+t_vec	*vec_unit(t_vec *v)
+{
+	return (vec_div_num(v, vec_len(v)));
+}
+
+double	vec_len(t_vec *v)
+{
+	return (sqrt(pow(v->x, 2) + pow(v->y, 2) + pow(v->z, 2)));
 }

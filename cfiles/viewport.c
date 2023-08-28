@@ -3,46 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:19:22 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/26 18:32:05 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/28 14:44:44 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 #include "miniRT.h"
+#include "viewport.h"
 
-t_vec   *get_pixel_center(int x, int y)
+t_viewport	*init_viewport()
 {
-    double  viewport_height;
-    double  viewport_width;
-    t_vec   *viewport_u;
-    t_vec   *viewport_v;
-    t_vec   *pixel_delta_u;
-    t_vec   *pixel_delta_v;
+	t_viewport	*viewport;
 
-    // Based on image resolution, define the viewport ratio
-    viewport_height = 2.0;
-    viewport_width = viewport_height * (WINX / WINY);
+	viewport = (t_viewport *)malloc(sizeof(t_viewport));
+	if (!viewport)
+		return (NULL);
+	viewport->height = 2.0;
+	viewport->width = viewport->height * ((double)WINX / (double)WINY);
+	viewport->focal_length = 1.0;
+	viewport->u = vec_new(viewport->width, 0, 0);
+	viewport->v = vec_new(0, -viewport->height, 0);
+	viewport->d_u = vec_new(viewport->u->x / WINX, 
+		viewport->u->y / WINX, viewport->u->z / WINX);
+	viewport->d_v = vec_new(viewport->v->x / WINY,
+		viewport->v->y / WINY, viewport->v->z / WINY);
+	viewport->upper_left_corner = vec_sub(vec_sub(vec_sub(vec_new(0, 0, 0),
+		vec_new(0, 0, viewport->focal_length)), vec_div_num(viewport->u, 2.0)),
+		vec_div_num(viewport->v, 2.0));
+	viewport->p_pixel_00 = vec_add(viewport->upper_left_corner,
+		vec_add(vec_mult_num(viewport->d_u, 0.5),
+		vec_mult_num(viewport->d_v, 0.5)));
+	return (viewport);
+}
 
-    // Based on viewport ratio and image resolution, define the viewport vectors
-    viewport_u = vec_new(viewport_width, 0, 0);
-    viewport_v = vec_new(0, viewport_height, 0);
+// Must be added somewhere
+void	free_viewport(t_viewport *viewport)
+{
+	if (!viewport)
+		return ;
+	vec_free(viewport->u);
+	vec_free(viewport->v);
+	vec_free(viewport->d_u);
+	vec_free(viewport->d_v);
+	vec_free(viewport->upper_left_corner);
+	vec_free(viewport->p_pixel_00);
+	free(viewport);
+}
 
-    // Based on image resolution and viewport vectors, define the space between each pixel
-    pixel_delta_u = vec_new(viewport_u->x / WINX, viewport_u->y / WINX, viewport_u->z / WINX);
-    pixel_delta_v = vec_new(viewport_v->x / WINY, viewport_v->y / WINY, viewport_v->z / WINY);
+t_vec	*get_pixel_center(t_viewport *v, int x, int y)
+{
+	t_vec	*pixel_center;
 
-    // Get the upper left viewport pixel
-    t_vec   *camera_center = vec_new(0, 0, 0);
-    t_vec   *focal_length = vec_new(0, 0, 1);
-    t_vec   *viewport_upper_left_corner = vec_sub(vec_sub(vec_sub(camera_center, focal_length), vec_div_num(viewport_u, 2.0)), vec_div_num(viewport_v, 2.0));
-    t_vec   *pixel_00_pos = vec_add(viewport_upper_left_corner, vec_mult_num(vec_add(pixel_delta_u, pixel_delta_v), 0.5));
-
-	//printf("viewport_u : %f %f %f\n", viewport_u->x, viewport_u->y, viewport_u->z);
-	//printf("pixel_delta_u: %f %f %f\n", pixel_delta_u->x, pixel_delta_u->y, pixel_delta_u->z);
-	//printf("viewport_upper_left_corner: %f %f %f\n", viewport_upper_left_corner->x, viewport_upper_left_corner->y, viewport_upper_left_corner->z);
-	//printf("pixel_00_pos: %f %f %f\n", pixel_00_pos->x, pixel_00_pos->y, pixel_00_pos->z);
-    return (vec_add(pixel_00_pos, vec_add(vec_mult_num(pixel_delta_u, x), vec_mult_num(pixel_delta_v, y))));
+	pixel_center = vec_add(v->p_pixel_00,
+		vec_add(vec_mult_num(v->d_u, x), vec_mult_num(v->d_v, y)));
+	//printf("pixel_center: %f %f %f\n", pixel_center->x, pixel_center->y, pixel_center->z);
+	return (pixel_center);
 }
