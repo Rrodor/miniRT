@@ -1,39 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free2.c                                            :+:      :+:    :+:   */
+/*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/14 14:58:57 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/31 21:27:27 by rrodor           ###   ########.fr       */
+/*   Created: 2023/08/30 13:56:40 by rrodor            #+#    #+#             */
+/*   Updated: 2023/08/30 13:56:58 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	sp_free(t_sp *sp)
+t_vec	*rotation(t_vec *vec, t_vec *rot)
 {
-	free(sp->id);
-	free(sp->pos);
-	free(sp->color);
-	free(sp);
-}
+	t_vec	*new_vec;
 
-void	pl_free(t_pl *pl)
-{
-	free(pl->id);
-	free(pl->pos);
-	free(pl->dir);
-	free(pl->color);
-	free(pl);
-}
-
-void	cy_free(t_cy *cy)
-{
-	free(cy->id);
-	free(cy->pos);
-	free(cy->dir);
-	free(cy->color);
-	free(cy);
+	new_vec = vec_new(0, 0, 0);
+	new_vec->x = vec->x * cos(rot->x) + vec->y * sin(rot->x);
+	new_vec->y = vec->x * -sin(rot->x) + vec->y * cos(rot->x);
+	new_vec->z = vec->z;
+	return (new_vec);
 }

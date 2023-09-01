@@ -60,6 +60,6 @@ fclean: clean
 
 rt:
 	gcc -I./hfiles -I./libft -I./minilibx -o miniRT $(SRCS) $(MLXLINK) $(LIBLINK)
-	./miniRT test.rt
+	./miniRT test4.rt
 
 re: fclean all

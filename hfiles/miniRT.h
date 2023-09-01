@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/27 19:46:20 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/31 19:52:09 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
+# include "color.h"
 
 # include "../minilibx/mlx.h"
 # include "../libft/libft.h"
@@ -25,8 +26,8 @@
 
 # define KEY_ESC 65307
 
-# define WINX 400
-# define WINY 200
+# define WINX 300
+# define WINY 300
 
 # define RAY_MIN 0.0001
 # define RAY_MAX 1.0e30
@@ -39,6 +40,7 @@
 # include "camera.h"
 # include "color.h"
 # include "viewport.h"
+# include "libft.h"
 
 typedef struct	s_data
 {
@@ -64,7 +66,7 @@ typedef struct	s_a
 {
 	char		*id;
 	float		ratio;
-	t_rgb		color;
+	t_rgb		*color;
 }				t_a;
 
 // light
@@ -73,36 +75,36 @@ typedef struct	s_l
 	char		*id;
 	t_vec		pos;
 	float		ratio;
-	t_rgb		color;
+	t_rgb		*color;
 }				t_l;
 
 // sphere
 typedef struct	s_sp
 {
 	char		*id;
+	t_rgb		*color;
 	t_vec		*pos;
 	float		radius;
-	t_rgb		color;
 }				t_sp;
 
 // plane
 typedef struct 	s_pl
 {
 	char		*id;
+	t_rgb		*color;
 	t_vec		*pos;
 	t_vec		*dir;
-	t_rgb		color;
 }				t_pl;
 
 // cylinder
 typedef struct	s_cy
 {
 	char		*id;
+	t_rgb		*color;
 	t_vec		*pos;
 	t_vec		*dir;
-	float		diameter;
+	float		radius;
 	float		height;
-	t_rgb		color;
 }				t_cy;
 
 // parse.c

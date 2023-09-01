@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 17:51:12 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/26 18:21:40 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:56:31 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ t_a	*tabtoamb(char **tab)
 	amb->id = ft_strdup("A");
 	amb->ratio = ft_atof(tab[1]);
 	tmp = ft_split(tab[2], ',');
-	amb->color.r = ft_atoi(tmp[0]);
-	amb->color.g = ft_atoi(tmp[1]);
-	amb->color.b = ft_atoi(tmp[2]);
+	amb->color = malloc(sizeof(t_rgb));
+	amb->color->r = ft_atoi(tmp[0]);
+	amb->color->g = ft_atoi(tmp[1]);
+	amb->color->b = ft_atoi(tmp[2]);
 	freetab(tmp);
 	freetab(tab);
 	return (amb);
@@ -78,9 +79,10 @@ t_l	*tabtolight(char **tab)
 	freetab(tmp);
 	light->ratio = ft_atof(tab[2]);
 	tmp = ft_split(tab[3], ',');
-	light->color.r = ft_atoi(tmp[0]);
-	light->color.g = ft_atoi(tmp[1]);
-	light->color.b = ft_atoi(tmp[2]);
+	light->color = malloc(sizeof(t_rgb));
+	light->color->r = ft_atoi(tmp[0]);
+	light->color->g = ft_atoi(tmp[1]);
+	light->color->b = ft_atoi(tmp[2]);
 	freetab(tmp);
 	freetab(tab);
 	return (light);

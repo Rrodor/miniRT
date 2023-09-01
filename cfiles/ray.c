@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 17:26:31 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/27 12:40:14 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/31 21:25:38 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "color.h"
 
 t_ray	*ray_new(t_vec *origin, t_vec *direction)
 {
@@ -57,43 +58,92 @@ t_vec	*ray_calculate(t_ray *ray, double t)
 	return (vec);
 }
 
-// This part should move to a calculus / intersection file
-// Only here for testing purposes
-// Checks if the ray intersects with the sphere
-int hit_sphere(t_vec *center, double radius, t_ray *ray)
+double	hit_sphere(t_vec *center, double radius, t_ray *ray)
 {
 	t_vec	*oc;
 	double	a;
 	double	b;
 	double	c;
+	double	d;
+	float	t;
+
 
 	oc = vec_new(ray->ori->x - center->x, ray->ori->y - center->y, ray->ori->z - center->z);
 	a = vec_dot(ray->dir, ray->dir);
 	b = 2.0 * vec_dot(oc, ray->dir);
 	c = vec_dot(oc, oc) - radius * radius;
-	if (b * b - 4 * a * c >= 0)
-		return (1);
+	d = b * b - 4 * a * c;
+	if (d > -0.0000001 && d < 0.0000001)
+	{
+		t = -b / (2.0 * a);
+		if (t > 0 && t < 1000.0)
+			return (t);
+	}
+	if (d > 0)
+	{
+		t = (-b - sqrt(d)) / (2.0 * a);
+		if (t > 0 && t < 1000.0)
+			return (t);
+	}
 	return (0);
 }
 
-int	hit_plane(t_pl *plane, t_ray *ray)
+double	hit_plane(t_pl *plane, t_ray *ray)
 {
-	float	denom;
-	float	t;
-	t_vec	*ray_o;
-	t_vec	*pl_o;
+	double denom;
+	double	t;
 
-	ray_o = vec_new(ray->ori->x, ray->ori->y, ray->ori->z);
-	pl_o = vec_new(plane->pos->x, plane->pos->y, plane->pos->z);
+	t = 0;
 
-	denom = vec_dot(plane->dir, pl_o);
+	denom = vec_dot(plane->dir, plane->pos);
 	if (vec_dot(ray->dir, plane->dir) == 0)
 		return (0);
-	t = (denom - vec_dot(plane->dir, ray_o)) / vec_dot(plane->dir, ray->dir);
-	//printf("t = %f\n", t);
-	if (t < 0)
+	t = (denom - vec_dot(plane->dir, ray->ori)) / vec_dot(plane->dir, ray->dir);
+	if (t < 0.0)
 		return (0);
-	if (t > 100)
+	if (t > 1000.0)
 		return (0);
-	return (t / 6);
+	return (t);
+}
+
+double	hit_cylinder(t_cy *cyl, t_ray *ray)
+{
+	double	a;
+	double	b;
+	double	c;
+	double	d;
+	double	t;
+	t_pl	*plane;
+
+	a = ray->dir->x * ray->dir->x + ray->dir->z * ray->dir->z;
+	b = 2 * (ray->dir->x * (ray->ori->x - cyl->pos->x) + ray->dir->z * (ray->ori->z - cyl->pos->z));
+	c = (ray->ori->x - cyl->pos->x) * (ray->ori->x - cyl->pos->x) + (ray->ori->z - cyl->pos->z) * (ray->ori->z - cyl->pos->z) - cyl->radius * cyl->radius;
+	d = b * b - 4 * a * c;
+	if (d > 0)
+	{
+		t = (-b - sqrt(d)) / (2.0 * a);
+		if (t > 0.0 && t < 1000.0)
+		{
+			if (cyl->height  + cyl->pos->y > ray->ori->y + t * ray->dir->y && cyl->pos->y - cyl->height < ray->ori->y + t * ray->dir->y)
+				return (t);
+			else
+			{
+				t = (-b + sqrt(d)) / (2.0 * a);
+				if (cyl->height  + cyl->pos->y > ray->ori->y + t * ray->dir->y && cyl->pos->y - cyl->height < ray->ori->y + t * ray->dir->y)
+				{
+					plane = (t_pl *)malloc(sizeof(t_pl));
+					if (cyl->pos->y - cyl->height < 0)
+						plane->pos = vec_new(cyl->pos->x, cyl->pos->y + cyl->height, cyl->pos->z);
+					else
+						plane->pos = vec_new(cyl->pos->x, cyl->pos->y - cyl->height, cyl->pos->z);
+					plane->dir = cyl->dir;
+					t = hit_plane(plane, ray);
+					if (t > 0 && t < 1000.0)
+						return (t);
+					//free(plane);
+				}
+			}
+		}
+	}
+	return (0);
 }

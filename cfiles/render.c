@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:26:16 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/27 19:50:15 by aramon           ###   ########.fr       */
+/*   Updated: 2023/08/31 16:17:44 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	draw(t_vars *vars, int x, int y)
 	p_pixel_center = get_pixel_center(vars->viewport, x, y);
 	v_ray_dir = vec_new(p_pixel_center->x, p_pixel_center->y, p_pixel_center->z);
 	ray = ray_new(vec_new(0, 0, 0), v_ray_dir);
-	img_pix_put(&vars->img, x, y, encode_rgb(get_color(ray)));
+	img_pix_put(&vars->img, x, y, encode_rgb(get_color(ray, vars->objs)));
 	free(v_ray_dir);
 	free(p_pixel_center);
 	free(ray);

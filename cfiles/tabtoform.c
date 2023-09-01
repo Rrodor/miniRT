@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 15:04:34 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/26 18:18:14 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:57:49 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ t_sp	*tabtosphere(char **tab)
 	freetab(tmp);
 	sphere->radius = ft_atof(tab[2]);
 	tmp = ft_split(tab[3], ',');
-	sphere->color.r = ft_atoi(tmp[0]);
-	sphere->color.g = ft_atoi(tmp[1]);
-	sphere->color.b = ft_atoi(tmp[2]);
+	sphere->color = malloc(sizeof(t_rgb));
+	sphere->color->r = ft_atoi(tmp[0]);
+	sphere->color->g = ft_atoi(tmp[1]);
+	sphere->color->b = ft_atoi(tmp[2]);
 	freetab(tmp);
 	freetab(tab);
 	return (sphere);
@@ -45,12 +46,13 @@ t_cy	*tabtocylinder(char **tab)
 	tmp = ft_split(tab[2], ',');
 	cylinder->dir = vec_new(ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2]));
 	freetab(tmp);
-	cylinder->diameter = ft_atof(tab[3]);
+	cylinder->radius = ft_atof(tab[3]) / 2.0;
 	cylinder->height = ft_atof(tab[4]);
 	tmp = ft_split(tab[5], ',');
-	cylinder->color.r = ft_atoi(tmp[0]);
-	cylinder->color.g = ft_atoi(tmp[1]);
-	cylinder->color.b = ft_atoi(tmp[2]);
+	cylinder->color = malloc(sizeof(t_rgb));
+	cylinder->color->r = ft_atoi(tmp[0]);
+	cylinder->color->g = ft_atoi(tmp[1]);
+	cylinder->color->b = ft_atoi(tmp[2]);
 	freetab(tmp);
 	freetab(tab);
 	return (cylinder);
@@ -70,8 +72,9 @@ t_pl	*tabtoplane(char **tab)
 	plane->dir = vec_new(ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2]));
 	freetab(tmp);
 	tmp = ft_split(tab[3], ',');
-	plane->color.r = ft_atoi(tmp[0]);
-	plane->color.g = ft_atoi(tmp[1]);
-	plane->color.b = ft_atoi(tmp[2]);
+	plane->color = malloc(sizeof(t_rgb));
+	plane->color->r = ft_atoi(tmp[0]);
+	plane->color->g = ft_atoi(tmp[1]);
+	plane->color->b = ft_atoi(tmp[2]);
 	return (plane);
 }
