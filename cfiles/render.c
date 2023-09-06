@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:26:16 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/31 16:17:44 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/05 15:54:40 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ int	render(t_vars *vars)
 		x = 0;
 		while (x < WINX)
 		{
-			progress(vars, (double)pixels_drawn++ / (total_pixels) * WINX, GREEN);
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->img_progress.img, 0, 0);
+			//progress(vars, (double)pixels_drawn++ / (total_pixels) * WINX, GREEN);
+			//mlx_put_image_to_window(vars->mlx, vars->win, vars->img_progress.img, 0, 0);
 			draw(vars, x, y);
 			x++;
 		}

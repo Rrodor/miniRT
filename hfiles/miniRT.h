@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/31 19:52:09 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/06 03:18:25 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 # define KEY_ESC 65307
 
-# define WINX 300
-# define WINY 300
+# define WINX 600
+# define WINY 600
 
 # define RAY_MIN 0.0001
 # define RAY_MAX 1.0e30

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:11:50 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/31 16:21:48 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/05 17:22:29 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 # define COLOR_H
 
-#include "ray.h"
 #include "libft.h"
+
+typedef struct s_ray t_ray;
 
 typedef struct	s_rgb
 {
@@ -28,5 +29,8 @@ t_rgb			*init_color(double r, double g, double b);
 t_rgb			*get_color(t_ray *ray, t_list *objects);
 int				encode_rgb(t_rgb *rgb);
 t_rgb			*lengthToColor(double t, t_rgb	*rgb);
+t_rgb			*color_from_sphere(t_ray *ray, double t, t_rgb *color);
+t_rgb			*color_from_plane(t_ray *ray, double t, t_rgb *color);
+t_rgb			*color_from_cylinder(t_ray *ray, double t, t_rgb *color);
 
 #endif

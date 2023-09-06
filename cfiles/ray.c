@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 17:26:31 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/31 21:25:38 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/05 16:49:41 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,16 @@ void	ray_free(t_ray *ray)
 }
 
 t_vec	*ray_calculate(t_ray *ray, double t)
+{
+	t_vec	*vec;
+
+	vec = vec_new(ray->ori->x + t * ray->dir->x,
+		ray->ori->y + t * ray->dir->y,
+		ray->ori->z + t * ray->dir->z);
+	return (vec);
+}
+
+t_vec	*ray_at(t_ray *ray, double t)
 {
 	t_vec	*vec;
 
