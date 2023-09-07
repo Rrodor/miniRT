@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:11:50 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/05 17:22:29 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/06 17:38:57 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 # define COLOR_H
 
-#include "libft.h"
+# include "libft.h"
 
-typedef struct s_ray t_ray;
+typedef struct s_ray	t_ray;
 
-typedef struct	s_rgb
+typedef struct s_rgb
 {
-    int			r;
-    int			g;
-    int			b;
+	int			r;
+	int			g;
+	int			b;
 }				t_rgb;
 
 t_rgb			*init_color(double r, double g, double b);

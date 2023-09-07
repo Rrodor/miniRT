@@ -14,6 +14,7 @@ SRC= 	main.c \
 		vector_utils_2.c \
 		vector_utils_3.c \
 		ray.c \
+		collision.c \
 		inter.c \
 		render.c \
 		camera.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:11:23 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/05 17:22:55 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/07 17:25:51 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_rgb	*get_color(t_ray *ray, t_list *objects)
 	t_sp	*obj;
 
 	t = 1000.0;
+	color = NULL;
 	while (objects)
 	{
 		obj = (t_sp *)objects->content;
@@ -45,18 +46,19 @@ t_rgb	*get_color(t_ray *ray, t_list *objects)
 			if (t1 > 0 && t1 < t)
 			{
 				t = t1;
-				//color = obj->color;
+				if (color)
+					free(color);
 				color = color_from_plane(ray, t, obj->color);
-				printf("color: %d %d %d\n", color->r, color->g, color->b);
 			}
 		}
 		if (ft_strncmp(obj->id, "sp", 2) == 0)
 		{
-			t1 = hit_sphere(obj->pos, 0.5, ray);
+			t1 = hit_sphere(objects->content, ray);
 			if (t1 > 0 && t1 < t)
 			{
 				t = t1;
-				//color = obj->color;
+				if (color)
+					free(color);
 				color = color_from_sphere(ray, t, obj->color);
 			}
 		}
@@ -66,7 +68,8 @@ t_rgb	*get_color(t_ray *ray, t_list *objects)
 			if (t1 > 0 && t1 < t)
 			{
 				t = t1;
-				//color = obj->color;
+				if (color)
+					free(color);
 				color = color_from_cylinder(ray, t, obj->color);
 			}
 		}
@@ -74,7 +77,6 @@ t_rgb	*get_color(t_ray *ray, t_list *objects)
 	}
 	if (t > 0 && t < 1000.0)
 		return (color);
-		//return (lengthToColor(t, color));
 	return(init_color(0, 0, 0));
 }
 
@@ -95,7 +97,6 @@ t_rgb	*lengthToColor(double t, t_rgb	*rgb)
 		return (init_color(0, 0, 0)); // Same as above
 	test = t;
 	f = (1 / test);
-	//f *= 1.5;
 	color = init_color(rgb->r * f, rgb->g * f, rgb->b * f);
 	return (color);
 }
@@ -109,15 +110,21 @@ t_rgb	*color_from_cylinder(t_ray *ray, double t, t_rgb *color)
 	t_vec	*light_dir;
 	t_vec	*cylinder_pos;
 	t_vec	*surface_normal;
+	t_vec	*tmp;
 
 	intensity = 1.0; // get_intensity();
 	light_pos = vec_new(1, 1, 0); // get_light_pos();
 	hit_point = ray_at(ray, t);
 	cylinder_pos = vec_new(0, 0, -1.5); // get_cylinder_pos();
-	surface_normal = vec_unit(vec_sub(hit_point, cylinder_pos));
-	light_dir = vec_unit(vec_sub(light_pos, hit_point));
+	tmp = vec_sub(hit_point, cylinder_pos);
+	surface_normal = vec_unit(tmp);
+	free(tmp);
+	tmp = vec_sub(light_pos, hit_point);
+	light_dir = vec_unit(tmp);
+	free(tmp);
 	free(light_pos);
 	free(hit_point);
+	free(cylinder_pos);
 	diffuse = vec_dot(surface_normal, light_dir) * intensity;
 	free(surface_normal);
 	free(light_dir);
@@ -135,12 +142,15 @@ t_rgb	*color_from_plane(t_ray *ray, double t, t_rgb *color)
 	t_vec	*light_pos;
 	t_vec	*light_dir;
 	t_vec	*surface_normal;
+	t_vec	*tmp;
 
 	surface_normal = vec_new(0, 1, 0); // get_surface_normal();
 	intensity = 1.0; // get_intensity();
 	light_pos = vec_new(1, 1, 0); // get_light_pos();
 	hit_point = ray_at(ray, t);
-	light_dir = vec_unit(vec_sub(light_pos, hit_point));
+	tmp = vec_sub(light_pos, hit_point);
+	light_dir = vec_unit(tmp);
+	free(tmp);
 	free(light_pos);
 	free(hit_point);
 	diffuse = vec_dot(surface_normal, light_dir) * intensity;
@@ -161,17 +171,23 @@ t_rgb	*color_from_sphere(t_ray *ray, double t, t_rgb *color)
 	t_vec	*light_dir;
 	t_vec	*sphere_pos;
 	t_vec	*surface_normal;
+	t_vec	*tmp;
 
 	intensity = 1.0; // get_intensity();
 	light_pos = vec_new(1, 1, 0); // get_light_pos();
 	hit_point = ray_at(ray, t);
 	sphere_pos = vec_new(0, 0, -1.6); // get_sphere_pos();
-	surface_normal = vec_unit(vec_sub(hit_point, sphere_pos));
-	light_dir = vec_unit(vec_sub(light_pos, hit_point));
+	tmp = vec_sub(hit_point, sphere_pos);
+	surface_normal = vec_unit(tmp);
+	free(tmp);
+	tmp = vec_sub(light_pos, hit_point);
+	light_dir = vec_unit(tmp);
+	free(tmp);
 	free(light_pos);
 	free(hit_point);
 	diffuse = vec_dot(surface_normal, light_dir) * intensity;
 	free(surface_normal);
+	free(sphere_pos);
 	free(light_dir);
 	double	ambient = 0.1; // get_ambient();
 	if (diffuse < ambient)

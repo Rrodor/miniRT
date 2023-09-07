@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/06 03:18:25 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/07 16:02:16 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@
 # include "../libft/get_next_line.h"
 
 # define KEY_ESC 65307
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_UP 65362
+# define KEY_DOWN 65364
+# define KEY_F 102
+# define KEY_R 114
+# define KEY_A 97
+# define KEY_Q 113
 
 # define WINX 600
 # define WINY 600
@@ -42,7 +50,7 @@
 # include "viewport.h"
 # include "libft.h"
 
-typedef struct	s_data
+typedef struct s_data
 {
 	void		*img;
 	char		*addr;
@@ -51,18 +59,19 @@ typedef struct	s_data
 	int			endian;
 }				t_data;
 
-typedef struct	s_vars
+typedef struct s_vars
 {
 	void		*mlx;
 	void		*win;
 	t_data		img;
 	t_data		img_progress;
 	t_list		*objs;
+	t_cam		*cam;
 	t_viewport	*viewport;
 }				t_vars;
 
 // ambiant
-typedef struct	s_a
+typedef struct s_a
 {
 	char		*id;
 	float		ratio;
@@ -70,16 +79,16 @@ typedef struct	s_a
 }				t_a;
 
 // light
-typedef struct	s_l
+typedef struct s_l
 {
 	char		*id;
-	t_vec		pos;
+	t_vec		*pos;
 	float		ratio;
 	t_rgb		*color;
 }				t_l;
 
 // sphere
-typedef struct	s_sp
+typedef struct s_sp
 {
 	char		*id;
 	t_rgb		*color;
@@ -88,7 +97,7 @@ typedef struct	s_sp
 }				t_sp;
 
 // plane
-typedef struct 	s_pl
+typedef struct s_pl
 {
 	char		*id;
 	t_rgb		*color;
@@ -97,7 +106,7 @@ typedef struct 	s_pl
 }				t_pl;
 
 // cylinder
-typedef struct	s_cy
+typedef struct s_cy
 {
 	char		*id;
 	t_rgb		*color;
@@ -122,6 +131,7 @@ void			*tabtoobj(char **tab);
 
 // close.c
 int				win_close(t_vars *vars);
+int				objreq(t_list *list);
 
 // free.c
 void			a_free(t_a *a);
@@ -134,6 +144,8 @@ void			freetab(void *content);
 void			sp_free(t_sp *sp);
 void			pl_free(t_pl *pl);
 void			cy_free(t_cy *cy);
+void			ray_free(t_ray *ray);
+void			viewport_free(t_viewport *viewport);
 
 // utils.c
 int				tablen(char **tab);
@@ -156,5 +168,9 @@ int				error_vector(char *str);
 
 // render.c
 int				render(t_vars *vars);
+
+// camera.c
+t_cam			*getcam(t_list *list);
+void			movecam(int keycode, t_vars *vars);
 
 #endif

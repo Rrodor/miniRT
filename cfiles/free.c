@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 15:00:43 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/31 21:29:15 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/07 16:03:58 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,23 @@
 void	a_free(t_a *a)
 {
 	free(a->id);
+	free(a->color);
 	free(a);
 }
 
 void	c_free(t_cam *c)
 {
 	free(c->id);
+	free(c->pos);
+	free(c->dir);
 	free(c);
 }
 
 void	l_free(t_l *l)
 {
 	free(l->id);
+	free(l->pos);
+	free(l->color);
 	free(l);
 }
 

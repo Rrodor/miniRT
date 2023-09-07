@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 17:51:12 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/31 15:56:31 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/07 16:02:38 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,7 @@ t_l	*tabtolight(char **tab)
 	light = malloc(sizeof(t_l));
 	light->id = ft_strdup("L");
 	tmp = ft_split(tab[1], ',');
-	light->pos.x = ft_atof(tmp[0]);
-	light->pos.y = ft_atof(tmp[1]);
-	light->pos.z = ft_atof(tmp[2]);
+	light->pos = vec_new(ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2]));
 	freetab(tmp);
 	light->ratio = ft_atof(tab[2]);
 	tmp = ft_split(tab[3], ',');

@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 15:04:34 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/31 15:57:49 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/07 16:20:56 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ t_pl	*tabtoplane(char **tab)
 	plane->color->r = ft_atoi(tmp[0]);
 	plane->color->g = ft_atoi(tmp[1]);
 	plane->color->b = ft_atoi(tmp[2]);
+	freetab(tmp);
+	freetab(tab);
 	return (plane);
 }

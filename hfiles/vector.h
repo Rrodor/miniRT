@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:54:54 by aramon            #+#    #+#             */
-/*   Updated: 2023/08/28 14:22:19 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/06 17:39:30 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define VECTOR_H
 
 // Vector3 struct
-typedef struct 	s_vec
+typedef struct s_vec
 {
 	double		x;
 	double		y;
@@ -41,11 +41,5 @@ double			vec_dot(t_vec *v1, t_vec *v2);
 t_vec			*vec_cross(t_vec *v1, t_vec *v2);
 t_vec			*vec_unit(t_vec *v);
 double			vec_len(t_vec *v);
-//t_vec	*vec_sub_pos(t_pos *p1, t_pos *p2);
-
-/* vector_utils_4.c
-t_pos	*vec_add_pos(t_vec *v1, t_vec *v2);
-t_vec	*pos_add_vec(t_pos *p1, t_pos *p2);
-t_vec	*vec_mult_pos_num(t_pos *pos, int n);*/
 
 #endif
