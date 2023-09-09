@@ -19,7 +19,8 @@ SRC= 	main.c \
 		render.c \
 		camera.c \
 		color.c \
-		viewport.c
+		viewport.c \
+		lighting.c
 
 SRCPATH= ./cfiles/
 OBJ= $(SRC:.c=.o)
@@ -61,6 +62,10 @@ fclean: clean
 
 rt:
 	gcc -I./hfiles -I./libft -I./minilibx -o miniRT $(SRCS) $(MLXLINK) $(LIBLINK)
-	./miniRT test4.rt
+	./miniRT map/test4.rt
+
+candle:
+	gcc -I./hfiles -I./libft -I./minilibx -o miniRT $(SRCS) $(MLXLINK) $(LIBLINK)
+	./miniRT map/candleingreenbox.rt
 
 re: fclean all
