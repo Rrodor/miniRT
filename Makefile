@@ -20,7 +20,8 @@ SRC= 	main.c \
 		camera.c \
 		color.c \
 		viewport.c \
-		lighting.c
+		lighting.c \
+		objcmp.c
 
 SRCPATH= ./cfiles/
 OBJ= $(SRC:.c=.o)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/09 15:10:33 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/09 17:54:28 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,5 +173,8 @@ int				render(t_vars *vars);
 // camera.c
 t_cam			*getcam(t_list *list);
 void			movecam(int keycode, t_vars *vars);
+
+// objcmp.c
+int				obj_cmp(void *obj1, void *obj2);
 
 #endif

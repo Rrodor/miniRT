@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:11:23 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/09 15:06:04 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/09 18:27:18 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,24 @@ t_vec	*calculate_cylinder_normal(t_vec *hit, t_cy *cylinder)
 	return (vec_unit(normal));
 }
 
-double	find_intersection(t_ray *shadow_ray, t_list *all_obj, t_sp *cur_obj)
+double	find_intersection(t_ray *shadow_ray, t_list **test, t_sp *cur_obj)
 {
-	int		allFound;
 	double	t;
 	double	t1;
+	t_list	*all_obj;
 
 	t = 1000.0;
+	all_obj = *test;
 	while (all_obj)
 	{
-		if (all_obj->content != cur_obj)
+		if (obj_cmp(cur_obj, all_obj->content) != 0)
 		{
-			t1 = hit_sphere(all_obj->content, shadow_ray);
+			if (ft_strncmp(((t_pl*)all_obj->content)->id, "pl", 2) == 0)
+				t1 = hit_plane(all_obj->content, shadow_ray);
+			else if (ft_strncmp(((t_sp*)all_obj->content)->id, "sp", 2) == 0)
+				t1 = hit_sphere(all_obj->content, shadow_ray);
+			else if (ft_strncmp(((t_cy*)all_obj->content)->id, "cy", 2) == 0)
+				t1 = hit_cylinder(all_obj->content, shadow_ray);
 			if (t1 > 0 && t1 < t)
 				return (t1);
 		}
@@ -65,7 +71,7 @@ double	find_intersection(t_ray *shadow_ray, t_list *all_obj, t_sp *cur_obj)
 	return (t);
 }
 
-t_rgb	*shading(t_list *all_obj, t_sp *cur_obj, t_vec *hit, t_lighting *light)
+t_rgb	*shading(t_list *all_obj, t_sp *cur_obj, t_vec *hit, t_lighting *light, t_list **test)
 {
 	t_vec	*normal;
 	t_vec	*light_dir;
@@ -86,7 +92,7 @@ t_rgb	*shading(t_list *all_obj, t_sp *cur_obj, t_vec *hit, t_lighting *light)
 	double	distance_to_light;
 	hit_point_nudged = vec_add(hit, vec_mult_num(normal, 0.001));
 	shadow_ray = ray_new(hit_point_nudged, light_dir);
-	shadow_t = find_intersection(shadow_ray, all_obj, cur_obj);
+	shadow_t = find_intersection(shadow_ray, test, cur_obj);
 	distance_to_light = vec_len(vec_sub(light->light_pos, hit));
 
 	if (shadow_t < distance_to_light)
@@ -106,24 +112,26 @@ t_rgb	*shading(t_list *all_obj, t_sp *cur_obj, t_vec *hit, t_lighting *light)
 	return (init_color(cur_obj->color->r * diffuse, cur_obj->color->g * diffuse, cur_obj->color->b * diffuse));
 }
 
-t_rgb	*get_color(t_lighting *light, t_ray *ray, t_list *objects)
+t_rgb	*get_color(t_lighting *light, t_ray *ray, t_list **objects)
 {
 	float	t;
 	float	t1;
 	t_rgb	*color;
 	t_sp	*obj;
+	t_list	*tmp;
 
 	t = 1000.0;
-	while (objects)
+	tmp = *objects;
+	while (tmp)
 	{
-		obj = (t_sp *)objects->content;
+		obj = (t_sp *)tmp->content;
 		if (ft_strncmp(obj->id, "pl", 2) == 0)
 		{
-			t1 = hit_plane(objects->content, ray);
+			t1 = hit_plane(tmp->content, ray);
 			if (t1 > 0 && t1 < t)
 			{
 				t = t1;
-				color = shading(objects, obj, ray_at(ray, t), light);
+				color = shading(tmp, obj, ray_at(ray, t), light, objects);
 			}
 		}
 		if (ft_strncmp(obj->id, "sp", 2) == 0)
@@ -132,19 +140,19 @@ t_rgb	*get_color(t_lighting *light, t_ray *ray, t_list *objects)
 			if (t1 > 0 && t1 < t)
 			{
 				t = t1;
-				color = shading(objects, obj, ray_at(ray, t), light);
+				color = shading(tmp, obj, ray_at(ray, t), light, objects);
 			}
 		}
 		if (ft_strncmp(obj->id, "cy", 2) == 0)
 		{
-			t1 = hit_cylinder(objects->content, ray);
+			t1 = hit_cylinder(tmp->content, ray);
 			if (t1 > 0 && t1 < t)
 			{
 				t = t1;
-				color = shading(objects, obj, ray_at(ray, t), light);
+				color = shading(tmp, obj, ray_at(ray, t), light, objects);
 			}
 		}
-		objects = objects->next;
+		tmp = tmp->next;
 	}
 	if (t > 0 && t < 1000.0)
 		return (color);
