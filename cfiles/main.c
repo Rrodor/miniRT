@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 14:02:21 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/07 18:13:20 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/09 15:10:45 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	main(int argc, char **argv)
 			&(vars.img_progress).bits_per_pixel,
 			&(vars.img_progress).line_length, &(vars.img_progress).endian);
 	vars.viewport = init_viewport(vars.cam);
+	vars.lighting = init_lighting(list);
 	render(&vars);
 	mlx_hook(vars.win, 17, 0L, win_close, &vars);
 	mlx_key_hook(vars.win, key_hook, &vars);

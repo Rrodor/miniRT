@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/07 16:02:16 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/09 15:10:33 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
-# include "color.h"
 
 # include "../minilibx/mlx.h"
 # include "../libft/libft.h"
@@ -49,6 +48,7 @@
 # include "color.h"
 # include "viewport.h"
 # include "libft.h"
+# include "lighting.h"
 
 typedef struct s_data
 {
@@ -68,6 +68,7 @@ typedef struct s_vars
 	t_list		*objs;
 	t_cam		*cam;
 	t_viewport	*viewport;
+	t_lighting	*lighting;
 }				t_vars;
 
 // ambiant
