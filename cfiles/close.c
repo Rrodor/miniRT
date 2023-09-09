@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:24:48 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/07 17:45:05 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/09 19:15:24 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	win_close(t_vars *vars)
 	viewport_free(vars->viewport);
 	if (vars->objs)
 		ft_lstclear(&(vars->objs), &freelst);
+	if (vars->lighting)
+		free(vars->lighting);
 	exit(0);
 }
 

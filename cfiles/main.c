@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 14:02:21 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/09 18:19:51 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/09 19:17:43 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	main(int argc, char **argv)
 		return (1);
 	vars.objs = list;
 	vars.cam = getcam(list);
-
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WINX, WINY, "miniRT");
 	vars.img.img = mlx_new_image(vars.mlx, WINX, WINY);

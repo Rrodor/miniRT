@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:11:23 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/09 18:27:18 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/09 19:07:05 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,19 @@ t_rgb	*shading(t_list *all_obj, t_sp *cur_obj, t_vec *hit, t_lighting *light, t_
 	t_vec	*normal;
 	t_vec	*light_dir;
 	double	diffuse;
+	t_vec	*tmp;
 
-	light_dir = vec_unit(vec_sub(light->light_pos, hit));
+	tmp = vec_sub(light->light_pos, hit);
+	light_dir = vec_unit(tmp);
+	free(tmp);
 	if (ft_strncmp(((t_pl*)all_obj->content)->id, "pl", 2) == 0)
 		normal = vec_unit(((t_pl*)all_obj->content)->dir);
 	else if (ft_strncmp(((t_sp*)all_obj->content)->id, "sp", 2) == 0)
-		normal = vec_unit(vec_sub(hit, ((t_sp*)all_obj->content)->pos));
+	{
+		tmp = vec_sub(hit, ((t_sp*)all_obj->content)->pos);
+		normal = vec_unit(tmp);
+		free(tmp);
+	}
 	else if (ft_strncmp(((t_cy*)all_obj->content)->id, "cy", 2) == 0)
 		normal = calculate_cylinder_normal(hit, ((t_cy*)all_obj->content));
 
@@ -90,10 +97,14 @@ t_rgb	*shading(t_list *all_obj, t_sp *cur_obj, t_vec *hit, t_lighting *light, t_
 	t_vec	*hit_point_nudged;
 	double	shadow_t;
 	double	distance_to_light;
-	hit_point_nudged = vec_add(hit, vec_mult_num(normal, 0.001));
+	tmp = vec_mult_num(normal, 0.001);
+	hit_point_nudged = vec_add(hit, tmp);
+	free(tmp);
 	shadow_ray = ray_new(hit_point_nudged, light_dir);
 	shadow_t = find_intersection(shadow_ray, test, cur_obj);
-	distance_to_light = vec_len(vec_sub(light->light_pos, hit));
+	tmp = vec_sub(light->light_pos, hit);
+	distance_to_light = vec_len(tmp);
+	free(tmp);
 
 	if (shadow_t < distance_to_light)
 		diffuse = 0;
@@ -109,6 +120,8 @@ t_rgb	*shading(t_list *all_obj, t_sp *cur_obj, t_vec *hit, t_lighting *light, t_
 
 	free(normal);
 	free(light_dir);
+	ray_free(shadow_ray);
+	free(hit_point_nudged);
 	return (init_color(cur_obj->color->r * diffuse, cur_obj->color->g * diffuse, cur_obj->color->b * diffuse));
 }
 
@@ -119,9 +132,11 @@ t_rgb	*get_color(t_lighting *light, t_ray *ray, t_list **objects)
 	t_rgb	*color;
 	t_sp	*obj;
 	t_list	*tmp;
+	t_vec	*tmpvec;
 
 	t = 1000.0;
 	tmp = *objects;
+	color = NULL;
 	while (tmp)
 	{
 		obj = (t_sp *)tmp->content;
@@ -131,7 +146,11 @@ t_rgb	*get_color(t_lighting *light, t_ray *ray, t_list **objects)
 			if (t1 > 0 && t1 < t)
 			{
 				t = t1;
-				color = shading(tmp, obj, ray_at(ray, t), light, objects);
+				tmpvec = ray_at(ray, t);
+				if (color)
+					free(color);
+				color = shading(tmp, obj, tmpvec, light, objects);
+				free(tmpvec);
 			}
 		}
 		if (ft_strncmp(obj->id, "sp", 2) == 0)
@@ -140,7 +159,11 @@ t_rgb	*get_color(t_lighting *light, t_ray *ray, t_list **objects)
 			if (t1 > 0 && t1 < t)
 			{
 				t = t1;
-				color = shading(tmp, obj, ray_at(ray, t), light, objects);
+				tmpvec = ray_at(ray, t);
+				if (color)
+					free(color);
+				color = shading(tmp, obj, tmpvec, light, objects);
+				free(tmpvec);
 			}
 		}
 		if (ft_strncmp(obj->id, "cy", 2) == 0)
@@ -149,14 +172,17 @@ t_rgb	*get_color(t_lighting *light, t_ray *ray, t_list **objects)
 			if (t1 > 0 && t1 < t)
 			{
 				t = t1;
-				color = shading(tmp, obj, ray_at(ray, t), light, objects);
+				tmpvec = ray_at(ray, t);
+				if (color)
+					free(color);
+				color = shading(tmp, obj, tmpvec, light, objects);
+				free(tmpvec);
 			}
 		}
 		tmp = tmp->next;
 	}
 	if (t > 0 && t < 1000.0)
 		return (color);
-		//return (lengthToColor(t, color));
 	return(init_color(0, 0, 0));
 }
 

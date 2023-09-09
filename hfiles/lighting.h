@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 12:56:56 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/08 12:55:40 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/09 19:15:35 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # include "vector.h"
 
-typedef struct	s_lighting
+typedef struct s_lighting
 {
 	t_vec		*light_pos;
 	double		intensity;
