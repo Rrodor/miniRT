@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/09 17:54:28 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/09 19:43:59 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,5 +176,11 @@ void			movecam(int keycode, t_vars *vars);
 
 // objcmp.c
 int				obj_cmp(void *obj1, void *obj2);
+
+// color2.c
+t_vec			*calculate_cylinder_normal(t_vec *hit, t_cy *cylinder);
+t_rgb			*init_color(double r, double g, double b);
+double			find_intersection(t_ray *shadow_ray, t_list **test, t_sp *cur_obj);
+int				encode_rgb(t_rgb *rgb);
 
 #endif

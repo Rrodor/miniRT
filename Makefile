@@ -19,6 +19,7 @@ SRC= 	main.c \
 		render.c \
 		camera.c \
 		color.c \
+		color2.c \
 		viewport.c \
 		lighting.c \
 		objcmp.c
