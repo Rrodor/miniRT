@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:56:52 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/11 16:30:25 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/11 21:42:07 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	opener(char *file, int *fd)
 	*fd = open(file, O_RDONLY);
 	if (*fd == -1)
 	{
-		ft_printf("Error: cannot open file %s\n", file);
+		ft_printf("Error\ncannot open file %s\n", file);
 		return (-1);
 	}
 	return (0);
@@ -25,10 +25,14 @@ int	opener(char *file, int *fd)
 
 void	*parse_error(char **tab, int fd, t_list *list)
 {
-	ft_printf("Error: file is not compatible\n");
+	char *line;
+
+	while (get_next_line(fd, &line) > 0)
+		free(line);
+	ft_printf("Error\nfile is not compatible\n");
 	freetab(tab);
-	ft_lstclear(&list, &freelst);
-	close (fd);
+	ft_lstclear(&list, freelst);
+	close(fd);
 	return (NULL);
 }
 
@@ -51,6 +55,7 @@ t_list	*parse(int fd)
 			if (rt_error(tab) == -1)
 				return (parse_error(tab, fd, list));
 			ft_lstadd_back(&list, ft_lstnew(tabtoobj(tab)));
+			//ft_lstclear(&list, freelst);
 		}
 		else
 			free(line);

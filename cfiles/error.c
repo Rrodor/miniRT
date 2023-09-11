@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 15:49:26 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/18 19:01:12 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/11 21:36:56 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int	rt_error(char **str)
 	static t_vec	i = {0, 0, 0};
 
 	if (!str[0])
+	{
+		freetab(str);
 		return (0);
+	}
 	if (ft_strncmp(str[0], "A", 1) == 0 && i.x++ == 0)
 		if (error_a(str) == -1)
 			return (-1);

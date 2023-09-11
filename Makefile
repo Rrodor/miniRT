@@ -38,7 +38,7 @@ MLX		= minilibx/libmlx.a
 MLXINC	= -I./minilibx
 MLXLINK = -L./minilibx -lmlx -lXext -lX11 -lm
 
-CC= gcc -Wall -Wextra -Werror
+CC= gcc 
 
 all: makelib $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:24:48 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/09 19:15:24 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/11 21:46:42 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	objreq(t_list *list)
 	}
 	if (cam == 1 && amb == 1 && light == 1)
 		return (0);
-	ft_printf("Error: Missing object(s)\n");
+	ft_printf("Error\nMissing object(s)\n");
 	if (list)
 		ft_lstclear(&list, freelst);
 	return (-1);

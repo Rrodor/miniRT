@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 14:02:21 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/09 19:17:43 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/11 21:43:14 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int	testmain(int argc, char **argv, int *fd, t_list **list)
 	if (opener(argv[1], fd) == -1)
 		return (-1);
 	*list = parse(*fd);
-	if (objreq(*list) == -1)
+	if (*list == NULL)
+		return (-1);
+	if (*list && objreq(*list) == -1)
 		return (-1);
 	if (*list == NULL)
 		return (-1);
