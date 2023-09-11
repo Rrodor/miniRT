@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:56:52 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/07 17:47:10 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/11 16:30:25 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ int	opener(char *file, int *fd)
 	return (0);
 }
 
+void	*parse_error(char **tab, int fd, t_list *list)
+{
+	ft_printf("Error: file is not compatible\n");
+	freetab(tab);
+	ft_lstclear(&list, &freelst);
+	close (fd);
+	return (NULL);
+}
+
 t_list	*parse(int fd)
 {
 	t_list	*list;
@@ -33,19 +42,18 @@ t_list	*parse(int fd)
 	list = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
-		str = ft_strtrim(line, " \n");
-		free(line);
-		tab = ft_split(str, ' ');
-		free(str);
-		if (rt_error(tab) == -1)
+		if (line[0] != '\n')
 		{
-			ft_printf("Error: file is not compatible\n");
-			freetab(tab);
-			ft_lstclear(&list, &freelst);
-			close (fd);
-			return (NULL);
+			str = ft_strtrim(line, " \n");
+			free(line);
+			tab = ft_split(str, ' ');
+			free(str);
+			if (rt_error(tab) == -1)
+				return (parse_error(tab, fd, list));
+			ft_lstadd_back(&list, ft_lstnew(tabtoobj(tab)));
 		}
-		ft_lstadd_back(&list, ft_lstnew(tabtoobj(tab)));
+		else
+			free(line);
 	}
 	close(fd);
 	return (list);

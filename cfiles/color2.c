@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 19:35:58 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/09 19:43:32 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/11 16:31:08 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ double	find_intersection(t_ray *shadow_ray, t_list **test, t_sp *cur_obj)
 	return (t);
 }
 
-int encode_rgb(t_rgb *rgb)
+int	encode_rgb(t_rgb *rgb)
 {
 	return (rgb->r << 16 | rgb->g << 8 | rgb->b);
 }
