@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/09 19:43:59 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/11 23:24:20 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@
 # define KEY_R 114
 # define KEY_A 97
 # define KEY_Q 113
+# define KEY_P 112
+# define KEY_O 111
+# define KEY_I 105
+# define KEY_J 106
+# define KEY_L 108
+# define KEY_K 107
+# define KEY_U 117
 
 # define WINX 600
 # define WINY 600
@@ -171,8 +178,8 @@ int				error_vector(char *str);
 int				render(t_vars *vars);
 
 // camera.c
-t_cam			*getcam(t_list *list);
-void			movecam(int keycode, t_vars *vars);
+t_cam			*get_cam(t_list *list);
+void			cam_movement(int keycode, t_vars *vars);
 
 // objcmp.c
 int				obj_cmp(void *obj1, void *obj2);
@@ -182,5 +189,8 @@ t_vec			*calculate_cylinder_normal(t_vec *hit, t_cy *cylinder);
 t_rgb			*init_color(double r, double g, double b);
 double			find_intersection(t_ray *shadow_ray, t_list **test, t_sp *cur_obj);
 int				encode_rgb(t_rgb *rgb);
+
+// rotation.c
+void			rot(t_vec *vec, t_vec *rot, int invert);
 
 #endif

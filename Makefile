@@ -13,6 +13,7 @@ SRC= 	main.c \
 		vector_utils_1.c \
 		vector_utils_2.c \
 		vector_utils_3.c \
+		vector_utils_4.c \
 		ray.c \
 		collision.c \
 		inter.c \
@@ -22,7 +23,8 @@ SRC= 	main.c \
 		color2.c \
 		viewport.c \
 		lighting.c \
-		objcmp.c
+		objcmp.c \
+		rotation.c
 
 SRCPATH= ./cfiles/
 OBJ= $(SRC:.c=.o)

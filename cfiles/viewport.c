@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:19:22 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/07 16:00:04 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/12 12:05:19 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,122 @@
 #include "miniRT.h"
 #include "viewport.h"
 
+t_vec	**compute_camera_basis(t_cam *cam)
+{
+	t_vec	*w;
+	t_vec	*u;
+	t_vec	*v;
+	t_vec	**basis;
+
+	w = vec_negate(cam->dir);
+	u = vec_cross(cam->up, w);
+	v = vec_cross(u, w);
+	v = vec_unit(v);
+	basis = (t_vec **)malloc(sizeof(t_vec *) * 3);
+	if (!basis)
+		return (NULL);
+	basis[0] = w;
+	basis[1] = u;
+	basis[2] = v;
+	return (basis);
+}
+
+t_vec	*compute_upper_left_corner(t_vec *cp, double foc, t_vec *u, t_vec *v)
+{
+	t_vec	*tmp;
+	t_vec	*tmp2;
+	t_vec	*tmp3;
+	t_vec	*upper_left_corner;
+
+	tmp = vec_new(0, 0, foc);
+	tmp2 = vec_sub(cp, tmp);
+	free(tmp);
+	tmp = vec_div_num(u, 2.0);
+	tmp3 = vec_sub(tmp2, tmp);
+	free(tmp);
+	free(tmp2);
+	tmp = vec_div_num(v, 2.0);
+	upper_left_corner = vec_sub(tmp3, tmp);
+	free(tmp);
+	free(tmp3);
+	return (upper_left_corner);
+}
+
+t_vec	*compute_pixel_00(t_vec *ulc, t_vec *d_u, t_vec *d_v, int x, int y)
+{
+	t_vec	*pixel_00;
+	t_vec	*tmp1;
+	t_vec	*tmp2;
+	t_vec	*tmp3;
+
+	tmp1 = vec_mult_num(d_u, 0.5);
+	tmp2 = vec_mult_num(d_v, 0.5);
+	tmp3 = vec_add(tmp1, tmp2);
+	pixel_00 = vec_add(ulc, tmp3);
+	free(tmp1);
+	free(tmp2);
+	free(tmp3);
+	return (pixel_00);
+}
+
 t_viewport	*init_viewport(t_cam *cam)
+{
+	t_viewport	*viewport;
+	t_vec		**basis;
+	t_vec		*u;
+	t_vec		*v;
+
+	viewport = (t_viewport *)malloc(sizeof(t_viewport));
+	if (!viewport)
+		return (NULL);
+	basis = compute_camera_basis(cam);
+	u = basis[1];
+	v = basis[2];
+	viewport->height = 2.0;
+	viewport->width = viewport->height * ((double)WINX / (double)WINY);
+	viewport->focal_length = 2.0 * atan(100 / (cam->fov * 2.0));
+	viewport->u = vec_mult_num(u, viewport->width);
+	viewport->v = vec_mult_num(v, viewport->height);
+	viewport->d_u = vec_new(viewport->u->x / WINX,
+		viewport->u->y / WINX, viewport->u->z / WINX);
+	viewport->d_v = vec_new(viewport->v->x / WINY,
+		viewport->v->y / WINY, viewport->v->z / WINY);
+	viewport->upper_left_corner = compute_upper_left_corner(cam->pos,
+		viewport->focal_length, viewport->u, viewport->v);
+	viewport->p_pixel_00 = compute_pixel_00(viewport->upper_left_corner,
+		viewport->d_u, viewport->d_v, WINX, WINY);
+	vec_free(basis[0]);
+	vec_free(basis[1]);
+	vec_free(basis[2]);
+	free(basis);
+	return (viewport);
+}
+
+/*t_viewport	*init_viewport(t_cam *cam)
 {
 	t_viewport	*viewport;
 	t_vec		*tmp;
 	t_vec		*tmp2;
 	t_vec		*tmp3;
+	t_vec		*w;
+	t_vec		*u;
+	t_vec		*v;
 
 	viewport = (t_viewport *)malloc(sizeof(t_viewport));
 	if (!viewport)
 		return (NULL);
+
+	w = vec_negate(cam->dir);
+	u = vec_cross(cam->up, w);
+	u = vec_unit(u);
+	v = vec_cross(u, w);
+	v = vec_unit(v);
+
 	viewport->height = 2.0;
 	viewport->width = viewport->height * ((double)WINX / (double)WINY);
 	viewport->focal_length = 2.0 * atan(100 / (cam->fov * 2.0));
-	viewport->u = vec_new(viewport->width, 0, 0);
-	viewport->v = vec_new(0, -viewport->height, 0);
+	viewport->u = vec_mult_num(u, viewport->width);
+	viewport->v = vec_mult_num(v, viewport->height);
 	viewport->d_u = vec_new(viewport->u->x / WINX,
 		viewport->u->y / WINX, viewport->u->z / WINX);
 	viewport->d_v = vec_new(viewport->v->x / WINY,
@@ -52,9 +153,8 @@ t_viewport	*init_viewport(t_cam *cam)
 	free(tmp2);
 	free(tmp3);
 	return (viewport);
-}
+}*/
 
-// Must be added somewhere
 void	free_viewport(t_viewport *viewport)
 {
 	if (!viewport)

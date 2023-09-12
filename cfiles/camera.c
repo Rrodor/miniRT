@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:51:51 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/07 14:08:20 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/12 11:51:48 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "camera.h"
 
-t_cam	*getcam(t_list *list)
+t_cam	*get_cam(t_list *list)
 {
 	t_cam	*cam;
 	t_list	*tmp;
+	t_vec	*world_up;
 
 	tmp = list;
 	cam = (t_cam *)list->content;
@@ -25,10 +26,32 @@ t_cam	*getcam(t_list *list)
 		tmp = tmp->next;
 		cam = (t_cam *)tmp->content;
 	}
+	world_up = vec_new(0, 1, 0);
+	cam->right = vec_cross(world_up, cam->dir);
+	cam->up = vec_cross(cam->dir, cam->right);
+	free(world_up);
 	return (cam);
 }
 
-void	movecam(int keycode, t_vars *vars)
+void	cam_rotation(int keycode, t_vars *vars)
+{
+	t_vec	*rot_angle;
+
+	rot_angle = vec_new(0.0, 0.0, 0.0);
+	if (keycode == KEY_L)
+	{
+		rot_angle->y = 0.1;
+		rot(vars->cam->dir, rot_angle, 1);
+	}
+	else if (keycode == KEY_J)
+	{
+		rot_angle->y = -0.1;
+		rot(vars->cam->dir, rot_angle, 1);
+	}
+	free(rot_angle);
+}
+
+void	cam_movement(int keycode, t_vars *vars)
 {
 	if (keycode == KEY_UP)
 		vars->cam->pos->y += 0.1;
@@ -49,6 +72,10 @@ void	movecam(int keycode, t_vars *vars)
 		else
 			vars->cam->fov -= 5;
 	}
+	if (keycode == KEY_J || keycode == KEY_L)
+		cam_rotation(keycode, vars);
 	vars->viewport = init_viewport(vars->cam);
 	render(vars);
 }
+
+

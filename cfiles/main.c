@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 14:02:21 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/11 21:43:14 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/12 12:06:22 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	key_hook(int keycode, t_vars *vars)
 	if (keycode == KEY_ESC)
 		win_close(vars);
 	else
-		movecam(keycode, vars);
+		cam_movement(keycode, vars);
 	return (0);
 }
 
@@ -57,7 +57,7 @@ int	main(int argc, char **argv)
 	if (testmain(argc, argv, &fd, &list) == -1)
 		return (1);
 	vars.objs = list;
-	vars.cam = getcam(list);
+	vars.cam = get_cam(list);
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WINX, WINY, "miniRT");
 	vars.img.img = mlx_new_image(vars.mlx, WINX, WINY);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:54:54 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/06 17:39:30 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/11 19:47:16 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,8 @@ double			vec_dot(t_vec *v1, t_vec *v2);
 t_vec			*vec_cross(t_vec *v1, t_vec *v2);
 t_vec			*vec_unit(t_vec *v);
 double			vec_len(t_vec *v);
+
+// vector_utils_4.c
+t_vec			*vec_negate(t_vec *v);
 
 #endif

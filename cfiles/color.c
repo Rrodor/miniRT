@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:11:23 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/09 19:54:57 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/12 16:05:32 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,88 @@
 #include "ray.h"
 #include <stdlib.h>
 #include "lighting.h"
+
+/*
+typdef struct	s_process_params
+{
+	t_list		*cur_obj;
+	t_ray		*ray;
+	t_sp		*obj;
+	t_lighting	*light;
+	t_list		**objects;
+}				t_process_params;
+
+
+
+t_vec	*get_normal(t_list *all_obj, t_vec *hit)
+{
+	t_vec	*normal;
+	t_vec	*tmp;
+
+	if (ft_strncmp(((t_pl*)all_obj->content)->id, "pl", 2) == 0)
+		normal = vec_unit(((t_pl*)all_obj->content)->dir);
+	else if (ft_strncmp(((t_sp*)all_obj->content)->id, "sp", 2) == 0)
+	{
+		tmp = vec_sub(hit, ((t_sp*)all_obj->content)->pos);
+		normal = vec_unit(tmp);
+		free(tmp);
+	}
+	else if (ft_strncmp(((t_cy*)all_obj->content)->id, "cy", 2) == 0)
+		normal = calculate_cylinder_normal(hit, ((t_cy*)all_obj->content));
+	return (normal);
+}
+
+t_ray	*prepare_shadow_ray(t_vec *normal, t_vec *hit, t_vec *light_dir)
+{
+	t_vec	*hit_point_nudged;
+	t_vec	*tmp;
+	t_vec	*shadow_ray;
+
+	tmp = vec_mult_num(normal, 0.001);
+	hit_point_nudged = vec_add(hit, tmp);
+	shadow_ray = ray_new(hit_point_nudged, light_dir);
+	free(tmp);
+	free(hit_point_nudged);
+	return (shadow_ray);
+}
+
+double	get_diffuse(t_diffuse_params *params)
+{
+	double	diffuse;
+
+	if (params->shadow_t < params->distance_to_light)
+		diffuse = 0;
+	else
+	{
+		double dot_val = vec_dot(params->normal, params->light_dir);
+		if (dot_val < 0)
+			diffuse = params->light->ambient_intensity / 2;
+		diffuse = dot_val * params->light->intensity;
+	}
+	if (diffuse < params->light->ambient_intensity)
+		diffuse = params->light->ambient_intensity;
+	return (diffuse);
+}
+
+t_rgb	*shading(t_list *all_obj, t_sp *cur_obj, t_vec *hit, t_lighting *light, t_list **test)
+{
+	t_vec	*normal;
+	t_vec	*light_dir;
+	double	diffuse;
+	t_vec	*tmp;
+
+	tmp = vec_sub(light->light_pos, hit);
+	light_dir = vec_unit(tmp);
+	free(tmp);
+	normal = calculate_normal(all_obj, hit);
+	diffuse = calculate_diffuse(normal, light_dir, light);
+	free(normal);
+	free(light_dir);
+	return (init_color(cur_obj->color->r * diffuse, cur_obj->color->g * diffuse, cur_obj->color->b * diffuse));
+}
+
+t_rgb	*process_object_hit(t_list *obj, float t1, t_ray *ray, t_lighting *light) */
+
 
 t_rgb	*shading(t_list *all_obj, t_sp *cur_obj, t_vec *hit, t_lighting *light, t_list **test)
 {

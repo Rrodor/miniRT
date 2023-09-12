@@ -3,22 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 13:56:40 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/30 13:56:58 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/11 23:04:59 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_vec	*rotation(t_vec *vec, t_vec *rot)
+void	rot_x(t_vec *vec, t_vec *rot, int invert)
 {
-	t_vec	*new_vec;
+	t_vec	new;
 
-	new_vec = vec_new(0, 0, 0);
-	new_vec->x = vec->x * cos(rot->x) + vec->y * sin(rot->x);
-	new_vec->y = vec->x * -sin(rot->x) + vec->y * cos(rot->x);
-	new_vec->z = vec->z;
-	return (new_vec);
+	new.y = vec->y * cos(invert * rot->x) + vec->z * -sin(invert * rot->x);
+	new.z = vec->y * sin(invert * rot->x) + vec->z * cos(invert * rot->x);
+	vec->y = new.y;
+	vec->z = new.z;
+}
+
+void	rot_y(t_vec *vec, t_vec *rot, int invert)
+{
+	t_vec	new;
+
+	new.x = vec->x * cos(invert * rot->y) + vec->z * sin(invert * rot->y);
+	new.z = vec->x * -sin(invert * rot->y) + vec->z * cos(invert * rot->y);
+	vec->x = new.x;
+	vec->z = new.z;
+}
+
+void	rot_z(t_vec *vec, t_vec *rot, int invert)
+{
+	t_vec	new;
+
+	new.x = vec->x * cos(invert * rot->z) + vec->y * -sin(invert * rot->z);
+	new.y = vec->x * sin(invert * rot->z) + vec->y * cos(invert * rot->z);
+	vec->x = new.x;
+	vec->y = new.y;
+}
+
+void	rot(t_vec *vec, t_vec *rot, int invert)
+{
+	if (invert == -1)
+	{
+		rot_x(vec, rot, invert);
+		rot_y(vec, rot, invert);
+		rot_z(vec, rot, invert);
+	}
+	else
+	{
+		rot_z(vec, rot, invert);
+		rot_y(vec, rot, invert);
+		rot_x(vec, rot, invert);
+	}
 }
