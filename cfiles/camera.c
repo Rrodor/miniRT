@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:51:51 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/13 15:23:11 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/13 19:15:48 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,31 +54,30 @@ void	cam_rotation(int keycode, t_vars *vars)
 	free(rot_angle);
 }
 
-void	cam_movement(int keycode, t_vars *vars)
+void	cam_movement(int kc, t_vars *vars)
 {
-	if (keycode == KEY_UP)
+	if (kc == KEY_UP)
 		vars->cam->pos->y += 0.1;
-	else if (keycode == KEY_DOWN)
+	else if (kc == KEY_DOWN)
 		vars->cam->pos->y -= 0.1;
-	else if (keycode == KEY_LEFT)
+	else if (kc == KEY_LEFT)
 		vars->cam->pos->x -= 0.1;
-	else if (keycode == KEY_RIGHT)
+	else if (kc == KEY_RIGHT)
 		vars->cam->pos->x += 0.1;
-	else if (keycode == KEY_Q)
+	else if (kc == KEY_Q)
 		vars->cam->pos->z -= 0.1;
-	else if (keycode == KEY_A)
+	else if (kc == KEY_A)
 		vars->cam->pos->z += 0.1;
-	else if (keycode == KEY_F || keycode == KEY_R)
+	else if (kc == KEY_F || kc == KEY_R)
 	{
-		if (keycode == KEY_F)
+		if (kc == KEY_F)
 			vars->cam->fov += 5;
 		else
 			vars->cam->fov -= 5;
 	}
-	if (keycode == KEY_J || keycode == KEY_L ||
-		keycode == KEY_I || keycode == KEY_K ||
-		keycode == KEY_O || keycode == KEY_U)
-		cam_rotation(keycode, vars);
+	if (kc == KEY_J || kc == KEY_L || kc == KEY_I || kc == KEY_K
+		|| kc == KEY_O || kc == KEY_U)
+		cam_rotation(kc, vars);
 	free_viewport(vars->viewport);
 	vars->viewport = init_viewport(vars->cam);
 	render(vars);
