@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:11:23 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/13 15:55:21 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/13 20:30:49 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ t_rgb	*get_color(t_vars **vars, t_ray *ray)
 	float	t;
 	float	t1;
 	t_rgb	*color;
-	t_sp	*obj;
 	t_list	*tmp;
 
 	t1 = -1;
@@ -99,19 +98,13 @@ t_rgb	*get_color(t_vars **vars, t_ray *ray)
 	color = NULL;
 	while (tmp)
 	{
-		obj = (t_sp *)tmp->content;
-		if (ft_strncmp(obj->id, "pl", 2) == 0)
-			t1 = hit_plane(tmp->content, ray);
-		else if (ft_strncmp(obj->id, "sp", 2) == 0)
-			t1 = hit_sphere(obj, ray);
-		else if (ft_strncmp(obj->id, "cy", 2) == 0)
-			t1 = hit_cylinder(tmp->content, ray);
+		t1 = getcollision(tmp->content, ray);
 		if (t1 > 0 && t1 < t)
 		{
 			t = t1;
 			if (color)
 				free(color);
-			color = shading(tmp, obj, ray_at(ray, t), vars);
+			color = shading(tmp, tmp->content, ray_at(ray, t), vars);
 		}
 		tmp = tmp->next;
 	}

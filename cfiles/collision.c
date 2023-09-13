@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 18:22:53 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/07 19:20:29 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/13 20:32:04 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,16 @@ double	hit_cylinder(t_cy *cyl, t_ray *ray)
 			return (t);
 		}
 	}
+	return (0);
+}
+
+float	getcollision(t_sp *obj, t_ray *ray)
+{
+	if (ft_strncmp(obj->id, "pl", 2) == 0)
+		return (hit_plane((void *)obj, ray));
+	else if (ft_strncmp(obj->id, "sp", 2) == 0)
+		return (hit_sphere(obj, ray));
+	else if (ft_strncmp(obj->id, "cy", 2) == 0)
+		return (hit_cylinder((void *)obj, ray));
 	return (0);
 }

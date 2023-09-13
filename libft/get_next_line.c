@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:56:24 by rrodor            #+#    #+#             */
-/*   Updated: 2023/08/14 19:25:07 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/13 20:21:48 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ int	get_next_line(int fd, char **line)
 	if (gnl_strchr(str, '\n') == 0)
 		l = read(fd, buf, BUFFER_SIZE);
 	if (l == 0 && !str)
-	{
 		free(buf);
+	if (l == 0 && !str)
 		return (0);
-	}
 	if (l == 0 && str[0] == 0)
 	{
 		free(buf);

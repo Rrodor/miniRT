@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 17:14:37 by rrodor            #+#    #+#             */
-/*   Updated: 2023/03/27 19:50:01 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/13 20:20:56 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #  define BUFFER_SIZE 100
 # endif
 
-int     get_next_line(int fd, char **line);
+int		get_next_line(int fd, char **line);
 char	*gnl_line(char *str);
 char	*gnl_strjoin(char *s1, char *s2);
 size_t	gnl_strlen(char *str);
