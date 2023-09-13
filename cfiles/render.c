@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:26:16 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/11 20:39:14 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/13 05:26:38 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ void	draw(t_vars *vars, int x, int y)
 	t_vec	*tmp = vec_sub(p_pixel_center, vars->cam->pos);
 	v_ray_dir = vec_unit(tmp);
 	free(tmp);
-	ray = ray_new(vars->cam->pos, v_ray_dir);
-	rgb = get_color(vars->lighting, ray, &(vars->objs));
+	ray = ray_new(vars->cam->pos, v_ray_dir, 0);
+	//rgb = get_color(vars->lighting, ray, &(vars->objs));
+	rgb = get_color(&vars, ray);
 	img_pix_put(&vars->img, x, y, encode_rgb(rgb));
 	free(rgb);
 	free(p_pixel_center);

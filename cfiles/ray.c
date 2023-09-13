@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 17:26:31 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/07 18:23:50 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/13 05:24:29 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "color.h"
 
-t_ray	*ray_new(t_vec *origin, t_vec *direction)
+t_ray	*ray_new(t_vec *origin, t_vec *direction, int f)
 {
 	t_ray	*ray;
 
@@ -28,6 +28,8 @@ t_ray	*ray_new(t_vec *origin, t_vec *direction)
 		ray_free(ray);
 		return (NULL);
 	}
+	if (f == 1)
+		free(origin);
 	return (ray);
 }
 

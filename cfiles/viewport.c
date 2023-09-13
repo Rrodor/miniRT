@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:19:22 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/12 12:05:19 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/12 23:06:43 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ t_vec	**compute_camera_basis(t_cam *cam)
 	return (basis);
 }
 
-t_vec	*compute_upper_left_corner(t_vec *cp, double foc, t_vec *u, t_vec *v)
+t_vec	*compute_upper_left_corner(t_cam *cam, double foc, t_vec *u, t_vec *v)
 {
 	t_vec	*tmp;
 	t_vec	*tmp2;
 	t_vec	*tmp3;
 	t_vec	*upper_left_corner;
 
-	tmp = vec_new(0, 0, foc);
-	tmp2 = vec_sub(cp, tmp);
+	tmp = vec_mult_num(cam->dir, -foc);
+	tmp2 = vec_sub(cam->pos, tmp);
 	free(tmp);
 	tmp = vec_div_num(u, 2.0);
 	tmp3 = vec_sub(tmp2, tmp);
@@ -94,7 +94,7 @@ t_viewport	*init_viewport(t_cam *cam)
 		viewport->u->y / WINX, viewport->u->z / WINX);
 	viewport->d_v = vec_new(viewport->v->x / WINY,
 		viewport->v->y / WINY, viewport->v->z / WINY);
-	viewport->upper_left_corner = compute_upper_left_corner(cam->pos,
+	viewport->upper_left_corner = compute_upper_left_corner(cam,
 		viewport->focal_length, viewport->u, viewport->v);
 	viewport->p_pixel_00 = compute_pixel_00(viewport->upper_left_corner,
 		viewport->d_u, viewport->d_v, WINX, WINY);

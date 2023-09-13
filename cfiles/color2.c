@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 19:35:58 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/11 16:31:08 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/13 05:02:56 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ double	find_intersection(t_ray *shadow_ray, t_list **test, t_sp *cur_obj)
 		}
 		all_obj = all_obj->next;
 	}
+	free(shadow_ray);
 	return (t);
 }
 
