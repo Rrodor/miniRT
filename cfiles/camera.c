@@ -6,7 +6,7 @@
 /*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:51:51 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/13 19:15:48 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/13 20:12:08 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	cam_movement(int kc, t_vars *vars)
 	if (kc == KEY_J || kc == KEY_L || kc == KEY_I || kc == KEY_K
 		|| kc == KEY_O || kc == KEY_U)
 		cam_rotation(kc, vars);
-	free_viewport(vars->viewport);
+	viewport_free(vars->viewport);
 	vars->viewport = init_viewport(vars->cam);
 	render(vars);
 }

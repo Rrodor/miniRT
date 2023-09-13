@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:19:22 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/13 15:22:34 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/13 20:11:22 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_vec	*compute_upper_left_corner(t_cam *cam, double foc, t_vec *u, t_vec *v)
 	return (upper_left_corner);
 }
 
-t_vec	*compute_pixel_00(t_vec *ulc, t_vec *d_u, t_vec *d_v, int x, int y)
+t_vec	*compute_pixel_00(t_vec *ulc, t_vec *d_u, t_vec *d_v)
 {
 	t_vec	*pixel_00;
 	t_vec	*tmp1;
@@ -78,8 +78,6 @@ t_viewport	*init_viewport(t_cam *cam)
 {
 	t_viewport	*viewport;
 	t_vec		**basis;
-	t_vec		*u;
-	t_vec		*v;
 
 	viewport = (t_viewport *)malloc(sizeof(t_viewport));
 	if (!viewport)
@@ -97,25 +95,12 @@ t_viewport	*init_viewport(t_cam *cam)
 	viewport->upper_left_corner = compute_upper_left_corner(cam,
 			viewport->focal_length, viewport->u, viewport->v);
 	viewport->p_pixel_00 = compute_pixel_00(viewport->upper_left_corner,
-			viewport->d_u, viewport->d_v, WINX, WINY);
+			viewport->d_u, viewport->d_v);
 	vec_free(basis[0]);
 	vec_free(basis[1]);
 	vec_free(basis[2]);
 	free(basis);
 	return (viewport);
-}
-
-void	free_viewport(t_viewport *viewport)
-{
-	if (!viewport)
-		return ;
-	vec_free(viewport->u);
-	vec_free(viewport->v);
-	vec_free(viewport->d_u);
-	vec_free(viewport->d_v);
-	vec_free(viewport->upper_left_corner);
-	vec_free(viewport->p_pixel_00);
-	free(viewport);
 }
 
 t_vec	*get_pixel_center(t_viewport *v, int x, int y)

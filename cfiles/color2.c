@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 19:35:58 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/13 15:59:00 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/13 19:56:16 by rrodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ double	find_intersection(t_ray *shadow_ray, t_list **test, t_sp *cur_obj)
 				t1 = hit_sphere(all_obj->content, shadow_ray);
 			else if (ft_strncmp(((t_cy *)all_obj->content)->id, "cy", 2) == 0)
 				t1 = hit_cylinder(all_obj->content, shadow_ray);
+			if (t1 > 0 && t1 < t)
+				ray_free(shadow_ray);
 			if (t1 > 0 && t1 < t)
 				return (t1);
 		}
