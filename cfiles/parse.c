@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:56:52 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/11 21:42:07 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/13 15:04:00 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	opener(char *file, int *fd)
 
 void	*parse_error(char **tab, int fd, t_list *list)
 {
-	char *line;
+	char	*line;
 
 	while (get_next_line(fd, &line) > 0)
 		free(line);
@@ -55,7 +55,6 @@ t_list	*parse(int fd)
 			if (rt_error(tab) == -1)
 				return (parse_error(tab, fd, list));
 			ft_lstadd_back(&list, ft_lstnew(tabtoobj(tab)));
-			//ft_lstclear(&list, freelst);
 		}
 		else
 			free(line);

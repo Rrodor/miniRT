@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrodor <rrodor@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:30:20 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/06 19:31:54 by rrodor           ###   ########.fr       */
+/*   Updated: 2023/09/13 15:26:54 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_viewport
 }				t_viewport;
 
 t_viewport		*init_viewport(t_cam *cam);
+void			free_viewport(t_viewport *viewport);
 t_vec			*get_pixel_center(t_viewport *viewport, int x, int y);
 
 #endif

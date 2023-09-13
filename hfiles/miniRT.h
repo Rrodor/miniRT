@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:12:08 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/11 23:24:20 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/13 15:00:21 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ int				render(t_vars *vars);
 // camera.c
 t_cam			*get_cam(t_list *list);
 void			cam_movement(int keycode, t_vars *vars);
+void			free_cam(t_cam *cam);
 
 // objcmp.c
 int				obj_cmp(void *obj1, void *obj2);
@@ -187,7 +188,8 @@ int				obj_cmp(void *obj1, void *obj2);
 // color2.c
 t_vec			*calculate_cylinder_normal(t_vec *hit, t_cy *cylinder);
 t_rgb			*init_color(double r, double g, double b);
-double			find_intersection(t_ray *shadow_ray, t_list **test, t_sp *cur_obj);
+double			find_intersection(t_ray *shadow_ray,
+					t_list **test, t_sp *cur_obj);
 int				encode_rgb(t_rgb *rgb);
 
 // rotation.c

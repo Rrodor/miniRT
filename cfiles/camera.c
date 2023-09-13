@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:51:51 by aramon            #+#    #+#             */
-/*   Updated: 2023/09/12 11:51:48 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/13 15:23:11 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,18 @@ void	cam_rotation(int keycode, t_vars *vars)
 
 	rot_angle = vec_new(0.0, 0.0, 0.0);
 	if (keycode == KEY_L)
-	{
 		rot_angle->y = 0.1;
-		rot(vars->cam->dir, rot_angle, 1);
-	}
 	else if (keycode == KEY_J)
-	{
 		rot_angle->y = -0.1;
-		rot(vars->cam->dir, rot_angle, 1);
-	}
+	else if (keycode == KEY_I)
+		rot_angle->x = 0.1;
+	else if (keycode == KEY_K)
+		rot_angle->x = -0.1;
+	else if (keycode == KEY_O)
+		rot_angle->z = 0.1;
+	else if (keycode == KEY_U)
+		rot_angle->z = -0.1;
+	rot(vars->cam->dir, rot_angle, 1);
 	free(rot_angle);
 }
 
@@ -72,10 +75,17 @@ void	cam_movement(int keycode, t_vars *vars)
 		else
 			vars->cam->fov -= 5;
 	}
-	if (keycode == KEY_J || keycode == KEY_L)
+	if (keycode == KEY_J || keycode == KEY_L ||
+		keycode == KEY_I || keycode == KEY_K ||
+		keycode == KEY_O || keycode == KEY_U)
 		cam_rotation(keycode, vars);
+	free_viewport(vars->viewport);
 	vars->viewport = init_viewport(vars->cam);
 	render(vars);
 }
 
-
+void	free_cam(t_cam *cam)
+{
+	free(cam->right);
+	free(cam->up);
+}

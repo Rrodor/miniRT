@@ -73,3 +73,7 @@ candle:
 	./miniRT map/candleingreenbox.rt
 
 re: fclean all
+
+grind:
+	gcc -I./hfiles -I./libft -I./minilibx -o miniRT $(SRCS) $(MLXLINK) $(LIBLINK) -g
+	valgrind --leak-check=full --show-leak-kinds=all ./miniRT map/candleingreenbox.rt

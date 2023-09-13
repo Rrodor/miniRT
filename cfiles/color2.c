@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 19:35:58 by rrodor            #+#    #+#             */
-/*   Updated: 2023/09/13 05:02:56 by aramon           ###   ########.fr       */
+/*   Updated: 2023/09/13 15:59:00 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ t_vec	*calculate_cylinder_normal(t_vec *hit, t_cy *cylinder)
 	tmp = vec_mult_num(cylinder->dir, t);
 	closest_point_on_axis = vec_add(cylinder->pos, tmp);
 	free(tmp);
-	normal = vec_sub(hit, closest_point_on_axis);
+	tmp = vec_sub(hit, closest_point_on_axis);
 	free(closest_point_on_axis);
 	free(base_to_hit);
-	return (vec_unit(normal));
+	normal = vec_unit(tmp);
+	free(tmp);
+	return (normal);
 }
 
 double	find_intersection(t_ray *shadow_ray, t_list **test, t_sp *cur_obj)
@@ -67,7 +69,7 @@ double	find_intersection(t_ray *shadow_ray, t_list **test, t_sp *cur_obj)
 		}
 		all_obj = all_obj->next;
 	}
-	free(shadow_ray);
+	ray_free(shadow_ray);
 	return (t);
 }
 
